@@ -14,6 +14,9 @@ class EventBus {
     const [log] = await db('event_logs').insert({
       event_name: event,
       payload: JSON.stringify({ data, meta }),
+      version: meta.version || 1,
+      producer: meta.producer || 'core',
+      correlation_id: meta.correlationId || null,
       status: 'pending',
     }).returning('*');
 
