@@ -31,6 +31,14 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
 
 registerEventHandlers();
 
+app.use((_req, res) => {
+  res.status(404).json({
+    success: false,
+    error: { code: 'NOT_FOUND', message: 'Ruta no encontrada' },
+    correlation_id: null,
+  });
+});
+
 app.use(errorHandler);
 
 export default app;

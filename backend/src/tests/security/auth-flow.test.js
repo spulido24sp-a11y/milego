@@ -197,3 +197,104 @@ describe('Auth Security', () => {
     expect(last).toBe(429);
   });
 });
+
+describe('Auth Rate Limiting — Dedicated Server', () => {
+  let rateServer;
+  const RATE_PORT = 3002;
+  const RATE_API = `http://localhost:${RATE_PORT}`;
+
+  async function rateFetch(path, options = {}) {
+    const url = `${RATE_API}/api/v1/auth${path}`;
+    const res = await fetch(url, {
+      headers: { 'Content-Type': 'application/json', ...options.headers },
+      ...options,
+    });
+    const body = await res.json().catch(() => ({}));
+    return { status: res.status, body };
+  }
+
+  function startRateServer() {
+    return new Promise((resolve, reject) => {
+      const proc = spawn('node', ['src/server.js'], {
+        cwd: backendRoot,
+        env: { ...process.env, PORT: String(RATE_PORT), LOGIN_RATE_LIMIT: '10' },
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      let started = false;
+      const check = (data) => {
+        const msg = data.toString();
+        if (!started && msg.includes('running on port')) {
+          started = true;
+          resolve(proc);
+        }
+      };
+      proc.stdout.on('data', check);
+      proc.stderr.on('data', check);
+      proc.on('error', reject);
+      proc.on('exit', (code) => {
+        if (!started) reject(new Error(`Rate server exited with code ${code}`));
+      });
+      setTimeout(() => {
+        if (!started) { started = true; resolve(proc); }
+      }, 5000);
+    });
+  }
+
+  beforeAll(async () => {
+    rateServer = await startRateServer();
+  }, 20000);
+
+  afterAll(() => {
+    if (rateServer) rateServer.kill();
+  });
+
+  it('refresh rate-limited — 429 on 11th call', async () => {
+    const { body: b } = await rateFetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: 'admin@milego.co', password: 'admin123' }),
+    });
+    expect(b.success).toBe(true);
+    const rt = b.data.refreshToken;
+
+    let last;
+    for (let i = 0; i < 11; i++) {
+      const { status } = await rateFetch('/refresh', {
+        method: 'POST',
+        body: JSON.stringify({ refreshToken: rt }),
+      });
+      if (i >= 10) last = status;
+    }
+    expect(last).toBe(429);
+  });
+
+  it('logout rate-limited — 429 on 11th call', async () => {
+    const { body: b } = await rateFetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: 'admin@milego.co', password: 'admin123' }),
+    });
+    expect(b.success).toBe(true);
+    const rt = b.data.refreshToken;
+
+    let last;
+    for (let i = 0; i < 11; i++) {
+      const { status } = await rateFetch('/logout', {
+        method: 'POST',
+        body: JSON.stringify({ refreshToken: rt }),
+      });
+      if (i >= 10) last = status;
+    }
+    expect(last).toBe(429);
+  });
+
+  it('login failure rate-limited — 429 on 11th attempt', async () => {
+    let last;
+    for (let i = 0; i < 11; i++) {
+      const { status } = await rateFetch('/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: `ratelimit-login-${i}@milego.co`, password: 'wrongpassword' }),
+      });
+      if (i >= 10) last = status;
+    }
+    expect(last).toBe(429);
+  });
+});
