@@ -1,0 +1,125 @@
+openapi: '3.1.0'
+info:
+  title: MIleGo API
+  version: 7.0.0
+  description: API de la plataforma de ecommerce MIleGo
+servers:
+  - url: /api/v1
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Product:
+      type: object
+      properties:
+        id: { type: integer }
+        uuid: { type: string }
+        name: { type: string }
+        slug: { type: string }
+        price: { type: integer }
+        status: { type: string }
+        stock: { type: integer }
+    Error:
+      type: object
+      properties:
+        success: { type: boolean, example: false }
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            details: { type: array, items: { type: object } }
+paths:
+  /health:
+    get:
+      summary: Health check
+      tags: [System]
+      responses:
+        '200':
+          description: API saludable
+  /auth/login:
+    post:
+      summary: Iniciar sesión
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: Login exitoso
+        '401':
+          description: Credenciales inválidas
+  /auth/me:
+    get:
+      summary: Usuario actual
+      tags: [Auth]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Datos del usuario
+  /config:
+    get:
+      summary: Configuración pública
+      tags: [Config]
+      responses:
+        '200':
+          description: Configuración de la tienda
+  /products:
+    get:
+      summary: Listar productos
+      tags: [Products]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer }
+        - name: per_page
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Lista paginada de productos
+    post:
+      summary: Crear producto
+      tags: [Products]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '201':
+          description: Producto creado
+  /products/{slug}/public:
+    get:
+      summary: Producto público
+      tags: [Products]
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Datos del producto
+  /categories:
+    get:
+      summary: Listar categorías
+      tags: [Categories]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Lista de categorías
+  /users:
+    get:
+      summary: Listar usuarios
+      tags: [Users]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Lista de usuarios
