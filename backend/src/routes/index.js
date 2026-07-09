@@ -3,6 +3,8 @@ import { config } from '../config/index.js';
 import { success } from '../utils/response.js';
 import authRoutes from './auth.routes.js';
 import configRoutes from './config.routes.js';
+import productRoutes from './product.routes.js';
+import categoryRoutes from './category.routes.js';
 
 const router = Router();
 
@@ -12,5 +14,7 @@ router.get('/health', (_req, res) => {
 
 router.use('/', authRoutes);
 router.use('/', configRoutes);
+router.use('/', productRoutes);
+router.use('/', categoryRoutes);
 
 export { router as routes };
