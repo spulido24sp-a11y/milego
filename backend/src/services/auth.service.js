@@ -46,12 +46,25 @@ export class AuthService {
 
       const session = await db('sessions')
         .where({ refresh_token_hash: hash })
+        .whereNull('revoked_at')
         .where('expires_at', '>', db.fn.now())
         .first();
 
-      if (!session) throw new Error('Invalid session');
+      if (!session) {
+        const revoked = await db('sessions')
+          .where({ refresh_token_hash: hash })
+          .whereNotNull('revoked_at')
+          .first();
+        if (revoked) {
+          await db('sessions').where({ user_id: revoked.user_id }).del();
+          throw Object.assign(new Error('Reuso de token detectado — todas las sesiones revocadas'), {
+            statusCode: 401, code: 'TOKEN_REUSE_DETECTED',
+          });
+        }
+        throw new Error('Invalid session');
+      }
 
-      await db('sessions').where({ id: session.id }).del();
+      await db('sessions').where({ id: session.id }).update({ revoked_at: db.fn.now() });
 
       const user = await userRepo.findById(payload.sub);
       if (!user) throw new Error('User not found');
@@ -68,7 +81,8 @@ export class AuthService {
       });
 
       return { accessToken: newAccessToken, refreshToken: newRefreshToken };
-    } catch {
+    } catch (err) {
+      if (err.code === 'TOKEN_REUSE_DETECTED') throw err;
       throw Object.assign(new Error('Refresh token inválido o expirado'), {
         statusCode: 401, code: 'REFRESH_INVALID',
       });
