@@ -1,0 +1,35 @@
+[
+  {
+    "sku": "ORG-001",
+    "nombre": "OrganiMax",
+    "slug": "organimax",
+    "descripcion": "Organizador premium para clóset que duplica el espacio disponible.",
+    "categoria": "organizadores",
+    "activo": true,
+    "precios": {
+      "x6": 79900,
+      "x12": 129900,
+      "x18": 179900
+    },
+    "precios_originales": {
+      "x6": 119900,
+      "x12": 199900,
+      "x18": 279900
+    },
+    "imagen": "/assets/img/hero.webp",
+    "landing": "/producto/organimax.html",
+    "destacado": true,
+    "stock": 999,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "OrganiMax – Organizadores de Clóset | MIleGo",
+      "descripcion": "Organiza tu clóset y duplica el espacio con OrganiMax de MIleGo."
+    },
+    "combos": [
+      { "id": "x6", "nombre": "Pack x6", "unidades": 6, "ahorro": 40000 },
+      { "id": "x12", "nombre": "Pack x12", "unidades": 12, "ahorro": 70000, "recomendado": true },
+      { "id": "x18", "nombre": "Pack x18", "unidades": 18, "ahorro": 100000 }
+    ]
+  }
+]

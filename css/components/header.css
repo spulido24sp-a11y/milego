@@ -1,0 +1,134 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  padding: 0.8rem 0;
+  transition: var(--transition-base);
+}
+
+.header-scrolled {
+  background: var(--header-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.header-logo {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-tight);
+  flex-shrink: 0;
+}
+
+.header-logo span {
+  color: var(--brand-primary);
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.header-nav a {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--neutral-500);
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.header-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--brand-primary);
+  transition: var(--transition-base);
+}
+
+.header-nav a:hover {
+  color: var(--neutral-900);
+}
+
+.header-nav a:hover::after {
+  width: 100%;
+}
+
+.header-theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.header-theme-toggle:hover {
+  background: var(--neutral-200);
+  color: var(--text-primary);
+}
+
+.header-mobile-toggle {
+  display: none;
+  font-size: var(--text-2xl);
+  color: var(--neutral-900);
+  background: none;
+  border: none;
+  padding: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--neutral-200);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-4);
+  }
+
+  .header-nav.is-open {
+    display: flex;
+  }
+
+  .header-nav a {
+    padding: var(--space-3) 0;
+    font-size: var(--text-base);
+    border-bottom: 1px solid var(--neutral-100);
+  }
+
+  .header-nav a:last-child {
+    border-bottom: none;
+  }
+
+  .header-nav a::after {
+    display: none;
+  }
+
+  .header-mobile-toggle {
+    display: block;
+  }
+}

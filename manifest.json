@@ -1,0 +1,17 @@
+{
+  "name": "MIleGo Colombia",
+  "short_name": "MIleGo",
+  "description": "Productos inteligentes para tu hogar. Envíos a toda Colombia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/img/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

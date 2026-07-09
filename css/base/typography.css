@@ -1,0 +1,53 @@
+h1, .h1 {
+  font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2, .h2 {
+  font-size: clamp(var(--text-2xl), 3.5vw, var(--text-4xl));
+  font-weight: var(--weight-extrabold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3, .h3 {
+  font-size: clamp(var(--text-xl), 2.5vw, var(--text-2xl));
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+h4, .h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+.text-muted {
+  color: var(--neutral-500);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: var(--weight-bold);
+}
+
+.font-extrabold {
+  font-weight: var(--weight-extrabold);
+}
+
+.leading-relaxed {
+  line-height: var(--leading-relaxed);
+}

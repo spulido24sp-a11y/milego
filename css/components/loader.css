@@ -1,0 +1,37 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background: var(--neutral-900);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-black);
+  color: var(--neutral-0);
+  letter-spacing: var(--tracking-tight);
+}
+
+.loader-logo span {
+  color: var(--brand-primary);
+}
+
+.loader-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+  animation: loaderProgress 1.8s ease forwards;
+}

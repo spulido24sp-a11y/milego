@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finaliza tu Pedido – OrganiMax | MIleGo V6</title>
+  <meta name="description" content="Completa tu pedido de OrganiMax. Pago contra entrega, envíos a toda Colombia. Compra segura.">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Finaliza tu Pedido – OrganiMax | MIleGo">
+  <meta property="og:description" content="Completa tu pedido de OrganiMax. Pago contra entrega a toda Colombia.">
+  <meta property="og:image" content="assets/img/hero.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:type" content="product">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://hook.chatproa.com; frame-src 'self' https://www.youtube.com; manifest-src 'self'">
+  <link rel="canonical" href="https://milego.co/checkout.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader-logo">MI<span>leGo</span></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header-container">
+      <a href="/" class="header-logo">MI<span>leGo</span></a>
+      <nav class="header-nav">
+        <a href="index.html#benefits">Beneficios</a>
+        <a href="index.html#pricing">Ofertas</a>
+        <a href="index.html#testimonials">Opiniones</a>
+        <a href="checkout.html">Comprar</a>
+      </nav>
+      <a href="checkout.html" class="btn btn-primary btn-sm">Comprar Ahora</a>
+      <button id="themeToggle" class="header-theme-toggle" aria-label="Cambiar tema"><i class="fa-solid fa-sun"></i></button>
+      <button class="header-mobile-toggle" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main>
+  <section class="checkout">
+    <div class="container">
+      <div class="checkout-card">
+        <div class="checkout-header" data-reveal>
+          <h1>Finaliza tu Pedido</h1>
+          <p>Recibe OrganiMax en la puerta de tu casa. Paga contra entrega.</p>
+        </div>
+
+        <div class="checkout-summary" data-reveal>
+          <div class="checkout-summary-row">
+            <span>Producto</span>
+            <strong>OrganiMax</strong>
+          </div>
+          <div class="checkout-summary-row">
+            <span>Envío</span>
+            <strong style="color:var(--brand-accent)">Gratis</strong>
+          </div>
+          <div class="checkout-summary-row total">
+            <span>Total</span>
+            <strong id="priceDisplay" style="color:var(--brand-primary)">$79.900</strong>
+          </div>
+        </div>
+
+        <form id="orderForm">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" class="form-input" placeholder="Ej: María García" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Correo electrónico</label>
+            <input type="email" id="email" class="form-input" placeholder="Ej: maria@ejemplo.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="telefono">Celular</label>
+            <input type="tel" id="telefono" class="form-input" placeholder="Ej: 300 123 4567" autocomplete="tel" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="departamento">Departamento</label>
+              <select id="departamento" class="form-select" autocomplete="address-level1" required><option value="">Selecciona...</option></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ciudad">Ciudad</label>
+              <select id="ciudad" class="form-select" required disabled><option value="">Selecciona...</option></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="direccion">Dirección</label>
+            <input type="text" id="direccion" class="form-input" placeholder="Cra 1 # 2-3, Barrio" autocomplete="street-address" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="combo">¿Cuántos organizadores quieres?</label>
+            <select id="combo" class="form-select">
+              <option value="1">Pack x6 – $79.900</option>
+              <option value="2" selected>Pack x12 – $129.900 (Recomendado)</option>
+              <option value="3">Pack x18 + Envío Gratis – $179.900</option>
+            </select>
+          </div>
+          <input type="hidden" id="totalPrice" name="totalPrice">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">CONFIRMAR MI PEDIDO – PAGO CONTRA ENTREGA</button>
+          <p class="text-xs text-muted text-center mt-4"><i class="fa-solid fa-lock"></i> Compra 100% segura. Pagas solo cuando recibes.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>MI<span>leGo</span></h3>
+          <p>Tienda colombiana premium de productos para el hogar. Transformamos tu espacio con calidad y diseño.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cambios y Devoluciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Atención</h4>
+          <ul>
+            <li><a href="tel:+573209898615"><i class="fa-solid fa-phone"></i> +57 320 989 8615</a></li>
+            <li><a href="mailto:hola@milego.co"><i class="fa-solid fa-envelope"></i> hola@milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 MIleGo. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
