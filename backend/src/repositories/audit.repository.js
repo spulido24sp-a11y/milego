@@ -11,6 +11,10 @@ export class AuditRepository {
       .leftJoin('users', 'audit_logs.user_id', 'users.id')
       .select('audit_logs.*', 'users.name as user_name', 'users.email as user_email');
 
+    if (!tenantId) return { logs: [], total: 0 };
+
+    query = query.where('audit_logs.store_id', tenantId);
+
     if (entityType) query = query.where('audit_logs.entity_type', entityType);
 
     const total = await query.clone().clearSelect().count('* as count').first();
