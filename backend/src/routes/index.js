@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { config } from '../config/index.js';
 import { success } from '../utils/response.js';
 import authRoutes from './auth.routes.js';
+import configRoutes from './config.routes.js';
 
 const router = Router();
 
@@ -10,5 +11,6 @@ router.get('/health', (_req, res) => {
 });
 
 router.use('/', authRoutes);
+router.use('/', configRoutes);
 
 export { router as routes };
