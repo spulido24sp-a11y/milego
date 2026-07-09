@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "migrate": "knex migrate:latest --knexfile src/config/database.js",
-    "migrate:rollback": "knex migrate:rollback --knexfile src/config/database.js",
-    "seed": "knex seed:run --knexfile src/config/database.js",
+    "migrate": "knex migrate:latest --knexfile knexfile.cjs",
+    "migrate:rollback": "knex migrate:rollback --knexfile knexfile.cjs",
+    "seed": "knex seed:run --knexfile knexfile.cjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
