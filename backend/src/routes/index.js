@@ -6,6 +6,7 @@ import configRoutes from './config.routes.js';
 import productRoutes from './product.routes.js';
 import categoryRoutes from './category.routes.js';
 import userRoutes from './user.routes.js';
+import auditRoutes from './audit.routes.js';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/', configRoutes);
 router.use('/', productRoutes);
 router.use('/', categoryRoutes);
 router.use('/', userRoutes);
+router.use('/', auditRoutes);
 
 export { router as routes };

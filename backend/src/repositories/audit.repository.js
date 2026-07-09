@@ -13,7 +13,7 @@ export class AuditRepository {
 
     if (entityType) query = query.where('audit_logs.entity_type', entityType);
 
-    const total = await query.clone().count('* as count').first();
+    const total = await query.clone().clearSelect().count('* as count').first();
     const logs = await query
       .orderBy('audit_logs.created_at', 'desc')
       .offset((page - 1) * perPage)

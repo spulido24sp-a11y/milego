@@ -16,6 +16,7 @@ const app = express();
 app.use(helmet());
 app.use(corsMiddleware);
 app.use(express.json());
+app.use('/admin', express.static(fileURLToPath(new URL('../../admin', import.meta.url))));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(requestId);
 app.use(requestLogger);
