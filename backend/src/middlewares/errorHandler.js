@@ -4,11 +4,12 @@ export function errorHandler(err, req, res, _next) {
   const message = statusCode === 500 ? 'Error interno del servidor' : err.message;
 
   if (statusCode === 500) {
-    req.log?.error({ err, reqId: req.id }, message);
+    req.log?.error({ err, reqId: req.id, correlationId: req.correlationId }, message);
   }
 
   return res.status(statusCode).json({
     success: false,
     error: { code, message, details: err.details || [] },
+    correlation_id: req.correlationId || null,
   });
 }

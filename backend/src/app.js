@@ -6,7 +6,7 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { corsMiddleware } from './config/cors.js';
 import { errorHandler } from './middlewares/errorHandler.js';
-import { requestId } from './middlewares/requestId.js';
+import { correlationId } from './middlewares/correlationId.js';
 import { requestLogger } from './middlewares/requestLogger.js';
 import { routes } from './routes/index.js';
 import { registerEventHandlers } from './events/register.js';
@@ -18,7 +18,7 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use('/admin', express.static(fileURLToPath(new URL('../../admin', import.meta.url))));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
-app.use(requestId);
+app.use(correlationId);
 app.use(requestLogger);
 app.use('/api/v1', routes);
 

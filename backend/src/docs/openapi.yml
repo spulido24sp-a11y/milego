@@ -58,6 +58,34 @@ paths:
           description: Login exitoso
         '401':
           description: Credenciales inválidas
+  /auth/refresh:
+    post:
+      summary: Refrescar token de acceso
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Nuevos tokens generados
+        '401':
+          description: Token inválido o revocado
+  /auth/logout:
+    post:
+      summary: Cerrar sesión
+      tags: [Auth]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Sesión cerrada
+        '401':
+          description: No autorizado
   /auth/me:
     get:
       summary: Usuario actual
@@ -92,9 +120,77 @@ paths:
       summary: Crear producto
       tags: [Products]
       security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                price: { type: integer }
+                stock: { type: integer }
       responses:
         '201':
           description: Producto creado
+        '400':
+          description: Error de validación
+  /products/{id}:
+    get:
+      summary: Obtener producto por ID
+      tags: [Products]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Datos del producto
+        '404':
+          description: Producto no encontrado
+    put:
+      summary: Actualizar producto
+      tags: [Products]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                price: { type: integer }
+                stock: { type: integer }
+                status: { type: string }
+      responses:
+        '200':
+          description: Producto actualizado
+        '400':
+          description: Error de validación
+        '404':
+          description: Producto no encontrado
+    delete:
+      summary: Eliminar producto
+      tags: [Products]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '204':
+          description: Producto eliminado
+        '404':
+          description: Producto no encontrado
   /products/{slug}/public:
     get:
       summary: Producto público
@@ -115,6 +211,76 @@ paths:
       responses:
         '200':
           description: Lista de categorías
+    post:
+      summary: Crear categoría
+      tags: [Categories]
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+      responses:
+        '201':
+          description: Categoría creada
+        '400':
+          description: Error de validación
+  /categories/{id}:
+    get:
+      summary: Obtener categoría por ID
+      tags: [Categories]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Datos de la categoría
+        '404':
+          description: Categoría no encontrada
+    put:
+      summary: Actualizar categoría
+      tags: [Categories]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+      responses:
+        '200':
+          description: Categoría actualizada
+        '400':
+          description: Error de validación
+        '404':
+          description: Categoría no encontrada
+    delete:
+      summary: Eliminar categoría
+      tags: [Categories]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '204':
+          description: Categoría eliminada
+        '404':
+          description: Categoría no encontrada
   /users:
     get:
       summary: Listar usuarios
@@ -123,3 +289,130 @@ paths:
       responses:
         '200':
           description: Lista de usuarios
+    post:
+      summary: Crear usuario
+      tags: [Users]
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                email: { type: string }
+                role: { type: string }
+      responses:
+        '201':
+          description: Usuario creado
+        '400':
+          description: Error de validación
+        '403':
+          description: Sin permisos
+  /users/{id}:
+    put:
+      summary: Actualizar usuario
+      tags: [Users]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                email: { type: string }
+                role: { type: string }
+      responses:
+        '200':
+          description: Usuario actualizado
+        '400':
+          description: Error de validación
+        '403':
+          description: Sin permisos
+        '404':
+          description: Usuario no encontrado
+    delete:
+      summary: Eliminar usuario
+      tags: [Users]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '204':
+          description: Usuario eliminado
+        '403':
+          description: Sin permisos
+        '404':
+          description: Usuario no encontrado
+  /audit:
+    get:
+      summary: Listar auditoría
+      tags: [Audit]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer }
+        - name: per_page
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Lista paginada de eventos de auditoría
+        '403':
+          description: Sin permisos
+  /admin/events/{id}/replay:
+    post:
+      summary: Reintentar un evento
+      tags: [Admin]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Evento reintentado
+        '403':
+          description: Sin permisos
+        '404':
+          description: Evento no encontrado
+  /admin/jobs/{id}/retry:
+    post:
+      summary: Reintentar un job fallido
+      tags: [Admin]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Job reintentado
+        '403':
+          description: Sin permisos
+        '404':
+          description: Job no encontrado
+  /admin/metrics:
+    get:
+      summary: Métricas del sistema
+      tags: [Admin]
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Métricas en tiempo real
+        '403':
+          description: Sin permisos
