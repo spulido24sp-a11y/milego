@@ -20,7 +20,7 @@ async function start() {
     process.exit(1);
   }
 
-  const server = app.listen(config.port, () => {
+  const server = app.listen(config.port, '0.0.0.0', () => {
     logger.info(`MIleGo API running on port ${config.port} [${config.env}]`);
   });
 
