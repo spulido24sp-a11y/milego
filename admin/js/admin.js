@@ -60,27 +60,44 @@ function initShell() {
 }
 
 const pageModules = {
-  '/dashboard': () => import('./pages/dashboard.js'),
+  '/dashboard': () => import('./pages/dashboard.js?v=1.1.2'),
+  '/product-radar': () => import('./pages/product-radar.js'),
+  '/orders': () => import('./pages/orders.js'),
+  '/launch': () => import('./pages/launch.js'),
   '/products': () => import('./pages/products.js'),
-  '/categories': () => import('./pages/categories.js'),
-  '/users': () => import('./pages/users.js'),
+  '/storefront': () => import('./pages/storefront.js'),
+  '/content': () => import('./pages/content.js'),
+  '/analytics': () => import('./pages/analytics.js'),
+  '/customers': () => import('./pages/customers.js'),
   '/settings': () => import('./pages/settings.js'),
   '/audit': () => import('./pages/audit.js'),
+  '/review': () => import('./pages/review.js?v=1.1.2'),
+  '/liam-observability': () => import('./pages/liam-observability.js'),
+  '/liam-recommendations': () => import('./pages/liam-recommendations.js'),
 };
 
 function getTitle(hash) {
   const titles = {
-    '/dashboard': 'Dashboard',
-    '/products': 'Productos',
-    '/categories': 'Categorías',
+    '/dashboard': 'Mission Control',
+    '/product-radar': 'Product Radar',
     '/orders': 'Pedidos',
-    '/customers': 'Clientes',
-    '/users': 'Usuarios',
-    '/settings': 'Configuración',
-    '/audit': 'Auditoría',
+    '/launch': 'Launch Center',
+    '/products': 'Products Intelligence',
+    '/storefront': 'Storefront Config',
+    '/content': 'Content Studio',
+    '/analytics': 'Growth Analytics',
+    '/customers': 'Customers',
+    '/settings': 'Settings',
+    '/audit': 'Audit Logs',
+    '/review': 'Workspace de Revisión',
+    '/liam-observability': 'LIAM Observability',
+    '/liam-recommendations': 'LIAM Recommendations',
   };
-  return titles[hash] || 'MIleGo Admin';
+  return titles[hash] || 'MIleGo OS';
 }
+
+import { LiamAssistant } from './components/liam-assistant.js';
+const assistant = new LiamAssistant();
 
 router.on('/login', () => {
   redirectToLogin();
@@ -93,19 +110,9 @@ for (const [hash, importer] of Object.entries(pageModules)) {
     app.innerHTML = renderShell(getTitle(hash), page.render());
     initShell();
     page.init?.();
-  });
-}
-
-const placeholders = {
-  '/orders': 'Pedidos',
-  '/customers': 'Clientes',
-};
-
-for (const [hash, title] of Object.entries(placeholders)) {
-  router.on(hash, () => {
-    if (!api.isAuthenticated) { redirectToLogin(); return; }
-    app.innerHTML = renderShell(title, `<div class="card"><p>Módulo en construcción</p></div>`);
-    initShell();
+    
+    // Mount neural assistant overlay in every route
+    assistant.mount();
   });
 }
 

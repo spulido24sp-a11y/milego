@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finaliza tu Pedido – OrganiMax | MIleGo V6</title>
+  <meta name="description" content="Completa tu pedido de OrganiMax. Pago contra entrega, envíos a toda Colombia. Compra segura.">
+  <meta name="keywords" content="comprar organizador de zapatos, pedido OrganiMax, MIleGo, Colombia">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Finaliza tu Pedido – OrganiMax | MIleGo">
+  <meta property="og:description" content="Completa tu pedido de OrganiMax. Pago contra entrega a toda Colombia.">
+  <meta property="og:image" content="assets/img/hero.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">MI<span>leGo</span></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="container">
+      <div><i class="fa-solid fa-truck"></i> Envíos a Toda Colombia</div>
+      <div><i class="fa-solid fa-hand-holding-dollar"></i> Pago Contra Entrega</div>
+      <div><i class="fa-solid fa-shield"></i> Compra Segura</div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container">
+      <a href="index.html" class="logo">MI<span>leGo</span></a>
+      <nav>
+        <a href="index.html#benefits">Beneficios</a>
+        <a href="index.html#pricing">Ofertas</a>
+        <a href="index.html#testimonials">Opiniones</a>
+        <a href="checkout.html">Comprar</a>
+      </nav>
+      <a href="checkout.html" class="btn-primary header-button">Comprar Ahora</a>
+      <button class="mobile-menu" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- CHECKOUT HERO -->
+  <section class="checkout-hero">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Pedido</span>
+        <h2>Finaliza tu Pedido</h2>
+        <p>Recibe OrganiMax en la puerta de tu casa. Paga contra entrega.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="checkout-section">
+    <div class="container">
+      <div class="checkout-grid">
+        <div class="checkout-summary reveal">
+          <img src="assets/img/hero.webp" alt="OrganiMax" width="400" height="400">
+          <h3>OrganiMax</h3>
+          <p class="summary-description">Organizador premium para clóset. Duplica el espacio sin comprar muebles.</p>
+          <div class="summary-features">
+            <div><i class="fa-solid fa-check-circle"></i> Material premium resistente</div>
+            <div><i class="fa-solid fa-check-circle"></i> Diseñado para todo tipo de zapatos</div>
+            <div><i class="fa-solid fa-check-circle"></i> Fácil instalación en segundos</div>
+            <div><i class="fa-solid fa-check-circle"></i> Envío gratis a toda Colombia</div>
+          </div>
+        </div>
+        <div class="checkout-form reveal">
+          <form id="orderForm">
+            <div class="input">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Ej: María García" required>
+            </div>
+            <div class="input">
+              <label for="telefono">Celular</label>
+              <input type="tel" id="telefono" placeholder="Ej: 300 123 4567" required>
+            </div>
+            <div class="input">
+              <label for="departamento">Departamento</label>
+              <select id="departamento" required><option value="">Selecciona tu departamento...</option></select>
+            </div>
+            <div class="input">
+              <label for="ciudad">Ciudad</label>
+              <select id="ciudad" required disabled><option value="">Selecciona tu ciudad...</option></select>
+            </div>
+            <div class="input">
+              <label for="direccion">Dirección</label>
+              <textarea id="direccion" placeholder="Cra 1 # 2-3, Barrio, Casa/Apto" required></textarea>
+            </div>
+            <div class="input">
+              <label for="combo">¿Cuántos organizadores quieres?</label>
+              <select id="combo">
+                <option value="6">Pack x6 – $79.900</option>
+                <option value="12" selected>Pack x12 – $129.900 (Recomendado)</option>
+                <option value="18">Pack x18 – $179.900</option>
+              </select>
+            </div>
+            <div class="input">
+              <label for="observaciones">Observaciones (opcional)</label>
+              <textarea id="observaciones" placeholder="Ej: Prefiero pago en efectivo, dejar en portería..."></textarea>
+            </div>
+            <div class="price-box">
+              <span>Total</span>
+              <strong id="totalPrice">$129.900</strong>
+            </div>
+            <button type="submit" class="btn-order">CONFIRMAR MI PEDIDO - PAGO CONTRA ENTREGA</button>
+            <div class="secure"><i class="fa-solid fa-lock"></i> Compra 100% segura. Tus datos están protegidos. Pagas solo cuando recibes.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2>MI<span>leGo</span></h2>
+          <p>Tienda colombiana premium de productos para el hogar. Transformamos tu espacio con calidad y diseño. +2.000 clientes satisfechos en todo el país.</p>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cambios y Devoluciones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Atención</h4>
+          <ul>
+            <li><a href="tel:+573000000000"><i class="fa-solid fa-phone"></i> +57 300 000 0000</a></li>
+            <li><a href="mailto:hola@milego.co"><i class="fa-solid fa-envelope"></i> hola@milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2026 MIleGo. Todos los derechos reservados. Hecho con ❤️ en Colombia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="#" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTop" aria-label="Volver arriba">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>

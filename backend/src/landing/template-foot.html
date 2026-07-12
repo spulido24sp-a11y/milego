@@ -1,0 +1,217 @@
+  <section id="checkout" class="section">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <h2>{{CHECKOUT_TITLE}}</h2>
+        <p>{{CHECKOUT_TEXT}}</p>
+      </div>
+      <div class="checkout-card" style="max-width:540px;margin:0 auto;">
+        <form id="orderForm" onsubmit="return handleOrderSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" class="form-input" placeholder="Ej: María García" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="telefono">Celular</label>
+            <input type="tel" id="telefono" class="form-input" placeholder="Ej: 300 123 4567" autocomplete="tel" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="departamento">Departamento</label>
+              <select id="departamento" class="form-select" autocomplete="address-level1" required><option value="">Selecciona...</option></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ciudad">Ciudad</label>
+              <select id="ciudad" class="form-select" required disabled><option value="">Selecciona...</option></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="direccion">Dirección</label>
+            <input type="text" id="direccion" class="form-input" placeholder="Cra 1 # 2-3, Barrio" autocomplete="street-address" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="combo">¿Cuántos organizadores quieres?</label>
+            {{CHECKOUT_OPTIONS}}
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-5) 0;border-top:1px solid var(--neutral-200);margin-bottom:var(--space-5);">
+            <span style="font-weight:var(--weight-bold);font-size:var(--text-lg);">Total</span>
+            <strong id="priceDisplay" style="font-size:var(--text-2xl);font-weight:var(--weight-black);color:var(--brand-primary);">{{CHECKOUT_TOTAL}}</strong>
+          </div>
+          <input type="hidden" id="productId" value="{{PRODUCT_ID}}">
+          <input type="hidden" id="totalPrice" name="totalPrice" value="{{CHECKOUT_TOTAL_VALUE}}">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">CONFIRMAR MI PEDIDO</button>
+          <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-3);margin-top:var(--space-4);flex-wrap:wrap;">
+            <span style="font-size:var(--text-xs);color:var(--neutral-400);display:inline-flex;align-items:center;gap:var(--space-1);"><i class="fa-solid fa-lock"></i> Datos protegidos</span>
+            <span style="font-size:var(--text-xs);color:var(--neutral-400);display:inline-flex;align-items:center;gap:var(--space-1);"><i class="fa-solid fa-shield-halved"></i> Pago seguro</span>
+            <span style="font-size:var(--text-xs);color:var(--neutral-400);display:inline-flex;align-items:center;gap:var(--space-1);"><i class="fa-solid fa-truck"></i> Envío rastreable</span>
+            <span style="font-size:var(--text-xs);color:var(--neutral-400);display:inline-flex;align-items:center;gap:var(--space-1);"><i class="fa-solid fa-rotate-left"></i> 30 días de garantía</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>MI<span>leGo</span></h3>
+          <p>{{FOOTER_DESC}}</p>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cambios y Devoluciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Atención</h4>
+          <ul>
+            <li><a href="tel:+573209898615"><i class="fa-solid fa-phone"></i> +57 320 989 8615</a></li>
+            <li><a href="mailto:hola@milego.co"><i class="fa-solid fa-envelope"></i> hola@milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 MIleGo. Todos los derechos reservados. Hecho en Colombia.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var SID = localStorage.getItem('milego_sid') || 's_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
+    localStorage.setItem('milego_sid', SID);
+
+    function track(name, extra) {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/v1/analytics/track', JSON.stringify({
+          event_type: 'landing',
+          event_name: name,
+          payload: extra || {},
+          source: window.location.pathname
+        }));
+      }
+    }
+
+    // Landing view
+    track('landing_view', { url: window.location.href, referrer: document.referrer });
+
+    // Scroll depth
+    var scrollFired = {};
+    window.addEventListener('scroll', function() {
+      var pct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
+      if (pct >= 25 && !scrollFired['25']) { scrollFired['25'] = true; track('scroll_25'); }
+      if (pct >= 50 && !scrollFired['50']) { scrollFired['50'] = true; track('scroll_50'); }
+      if (pct >= 75 && !scrollFired['75']) { scrollFired['75'] = true; track('scroll_75'); }
+    }, { passive: true });
+
+    // CTA click tracking
+    document.addEventListener('click', function(e) {
+      var t = e.target.closest('a[href*="#checkout"], .btn, button');
+      if (!t) return;
+      var text = (t.textContent || '').trim().substring(0, 60);
+      track('cta_click', { text: text, href: t.getAttribute('href') || '' });
+    });
+
+    // Expose for order form
+    window.__track = track;
+    window.__sessionId = SID;
+  })();
+  </script>
+  <script>
+  (function(){
+    var locs = null;
+    var deptEl = document.getElementById('departamento');
+    var cityEl = document.getElementById('ciudad');
+
+    if (deptEl) {
+      fetch('/data/locations.json').then(function(r){return r.json()}).then(function(data){
+        locs = data.departments || data;
+        locs.forEach(function(d){
+          var o = document.createElement('option');
+          o.value = d.department || d.name || d;
+          o.textContent = d.department || d.name || d;
+          deptEl.appendChild(o);
+        });
+        deptEl.addEventListener('change', function(){
+          var sel = locs.find(function(d){ return (d.department || d.name || d) === deptEl.value; });
+          cityEl.innerHTML = '<option value="">Selecciona...</option>';
+          cityEl.disabled = false;
+          (sel && (sel.cities || sel.ciudades || [])).forEach(function(c){
+            var o = document.createElement('option');
+            o.value = c.name || c.city || c;
+            o.textContent = c.name || c.city || c;
+            cityEl.appendChild(o);
+          });
+        });
+      }).catch(function(){});
+    }
+
+    var comboRadios = document.querySelectorAll('input[name="combo"]');
+    comboRadios.forEach(function(r){
+      r.addEventListener('change', function(){
+        var price = r.getAttribute('data-price') || r.value;
+        document.getElementById('priceDisplay').textContent = '$' + parseInt(price).toLocaleString('es-CO');
+        document.getElementById('totalPrice').value = price;
+      });
+    });
+  })();
+
+  function handleOrderSubmit(e) {
+    e.preventDefault();
+    var form = e.target;
+    var name = (document.getElementById('nombre')||{}).value;
+    var phone = (document.getElementById('telefono')||{}).value;
+    var dept = (document.getElementById('departamento')||{}).value;
+    var city = (document.getElementById('ciudad')||{}).value;
+    var addr = (document.getElementById('direccion')||{}).value;
+    var pid = parseInt((document.getElementById('productId')||{}).value);
+    var qty = 1;
+    var selCombo = document.querySelector('input[name="combo"]:checked');
+    if (selCombo) qty = parseInt(selCombo.value) || 1;
+
+    if (!name || !phone || !dept || !city || !addr) {
+      alert('Completa todos los campos obligatorios');
+      return false;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Procesando...';
+
+    fetch('/api/v1/checkout', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        customer: { name: name, phone: phone },
+        shipping_address: { street: addr, city: city, state: dept, country: 'Colombia' },
+        items: [{ product_id: pid, quantity: qty }],
+        payment_method: 'cash_on_delivery',
+        whatsapp_opt_in: true
+      })
+    }).then(function(r){return r.json()}).then(function(json){
+      if (json.success) {
+        var order = json.data.order;
+        window.location.href = '/gracias.html?order=' + encodeURIComponent(order.order_number) + '&nombre=' + encodeURIComponent(name);
+      } else {
+        alert('Error: ' + (json.error?.message || 'No se pudo procesar'));
+        btn.disabled = false;
+        btn.textContent = 'Intentar de nuevo';
+      }
+    }).catch(function(){
+      alert('Error de conexion. Verifica tu internet.');
+      btn.disabled = false;
+      btn.textContent = 'Intentar de nuevo';
+    });
+    return false;
+  }
+  </script>
+  <script src="/config.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,35 +1,302 @@
 [
   {
-    "sku": "ORG-001",
-    "nombre": "OrganiMax",
-    "slug": "organimax",
-    "descripcion": "Organizador premium para clóset que duplica el espacio disponible.",
-    "categoria": "organizadores",
+    "sku": "INF-001",
+    "nombre": "Inflador de Llantas Portátil Eléctrico",
+    "slug": "inflador-llantas-portatil",
+    "descripcion": "Inflador inteligente de llantas de alta potencia para carros, motos y bicicletas. Evita grúas y varadas en carretera.",
+    "categoria": "automotriz",
     "activo": true,
     "precios": {
-      "x6": 79900,
-      "x12": 129900,
-      "x18": 179900
+      "x1": 139900,
+      "x2": 237800
     },
     "precios_originales": {
-      "x6": 119900,
-      "x12": 199900,
-      "x18": 279900
+      "x1": 199900,
+      "x2": 399800
     },
-    "imagen": "/assets/img/hero.webp",
-    "landing": "/producto/organimax.html",
+    "imagen": "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/inflador-llantas-portatil.html",
     "destacado": true,
-    "stock": 999,
+    "stock": 100,
     "proveedor": "Dropi",
     "dropi_id": "",
     "meta": {
-      "titulo": "OrganiMax – Organizadores de Clóset | MIleGo",
-      "descripcion": "Organiza tu clóset y duplica el espacio con OrganiMax de MIleGo."
+      "titulo": "Inflador de Llantas Portátil Eléctrico | MIleGo",
+      "descripcion": "Evita varadas. Compresor de aire recargable para auto y moto en Colombia."
     },
     "combos": [
-      { "id": "x6", "nombre": "Pack x6", "unidades": 6, "ahorro": 40000 },
-      { "id": "x12", "nombre": "Pack x12", "unidades": 12, "ahorro": 70000, "recomendado": true },
-      { "id": "x18", "nombre": "Pack x18", "unidades": 18, "ahorro": 100000 }
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 60000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 162000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "COR-001",
+    "nombre": "Cortadora de Verduras 4 en 1 Recargable",
+    "slug": "cortadora-verduras-4en1",
+    "descripcion": "Pica ajo, cebolla y verduras directamente sobre la olla. Recargable por USB y fácil de limpiar.",
+    "categoria": "cocina",
+    "activo": true,
+    "precios": {
+      "x1": 79900,
+      "x2": 135800
+    },
+    "precios_originales": {
+      "x1": 119900,
+      "x2": 239800
+    },
+    "imagen": "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/cortadora-verduras-4en1.html",
+    "destacado": true,
+    "stock": 150,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Cortadora de Verduras 4 en 1 Recargable | MIleGo",
+      "descripcion": "Pica vegetales en segundos de forma fácil y rápida."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 40000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 104000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "SEC-001",
+    "nombre": "Secador Mascota 2 en 1",
+    "slug": "secador-mascota-2en1",
+    "descripcion": "Secador y cepillo silencioso para peinar y secar a tu perro o gato de una pasada sin asustarlo.",
+    "categoria": "mascotas",
+    "activo": true,
+    "precios": {
+      "x1": 99900,
+      "x2": 169800
+    },
+    "precios_originales": {
+      "x1": 149900,
+      "x2": 299800
+    },
+    "imagen": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/secador-mascota-2en1.html",
+    "destacado": true,
+    "stock": 80,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Secador de Mascotas Silencioso 2 en 1 | MIleGo",
+      "descripcion": "Cepilla y seca a tu mascota sin ruidos molestos."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 50000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 130000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "DES-001",
+    "nombre": "Deshumidificador Portátil",
+    "slug": "deshumidificador-portatil",
+    "descripcion": "Elimina la humedad de clósets y habitaciones evitando moho y malos olores. Compacto y silencioso.",
+    "categoria": "hogar",
+    "activo": true,
+    "precios": {
+      "x1": 129900,
+      "x2": 220800
+    },
+    "precios_originales": {
+      "x1": 199900,
+      "x2": 399800
+    },
+    "imagen": "https://images.unsplash.com/photo-1595079676339-1534801ad6cf?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/deshumidificador-portatil.html",
+    "destacado": false,
+    "stock": 50,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Deshumidificador Portátil Silencioso | MIleGo",
+      "meta_description": "Protege tu ropa y salud eliminando el exceso de humedad en el ambiente."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 70000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 179000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "PLA-001",
+    "nombre": "Plancha Vapor Vertical",
+    "slug": "plancha-vapor-vertical",
+    "descripcion": "Desarruga tu ropa directamente en el gancho. Vapor continuo que cuida las telas y elimina bacterias.",
+    "categoria": "hogar",
+    "activo": true,
+    "precios": {
+      "x1": 89900,
+      "x2": 152800
+    },
+    "precios_originales": {
+      "x1": 139900,
+      "x2": 279800
+    },
+    "imagen": "https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/plancha-vapor-vertical.html",
+    "destacado": false,
+    "stock": 120,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Plancha de Vapor Vertical Portátil | MIleGo",
+      "descripcion": "Planchado fácil y rápido en gancho ideal para viajes."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 50000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 127000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "LAM-001",
+    "nombre": "Lámpara Cargador LED",
+    "slug": "lampara-cargador-led",
+    "descripcion": "Lámpara de escritorio inteligente con cargador inalámbrico Qi para celular y múltiples tonos de luz.",
+    "categoria": "tecnologia",
+    "activo": true,
+    "precios": {
+      "x1": 129900,
+      "x2": 220800
+    },
+    "precios_originales": {
+      "x1": 199900,
+      "x2": 399800
+    },
+    "imagen": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/lampara-cargador-led.html",
+    "destacado": false,
+    "stock": 90,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Lámpara de Escritorio con Cargador Inalámbrico | MIleGo",
+      "descripcion": "Luz de lectura premium y cargador Qi integrados."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 70000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 179000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "DIS-001",
+    "nombre": "Dispensador Jabón Sensor",
+    "slug": "dispensador-jabon-sensor",
+    "descripcion": "Dispensador automático de jabón en espuma con sensor de movimiento para un lavado higiénico sin contacto.",
+    "categoria": "hogar",
+    "activo": true,
+    "precios": {
+      "x1": 69900,
+      "x2": 118800
+    },
+    "precios_originales": {
+      "x1": 99900,
+      "x2": 199800
+    },
+    "imagen": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/dispensador-jabon-sensor.html",
+    "destacado": false,
+    "stock": 200,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Dispensador Automático de Jabón | MIleGo",
+      "descripcion": "Lavado de manos sin contacto por sensor infrarrojo."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 30000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 81000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "ASP-001",
+    "nombre": "Aspiradora de Mano USB",
+    "slug": "aspiradora-mano-usb",
+    "descripcion": "Aspiradora inalámbrica portátil de alta succión para carro, oficina y rincones difíciles.",
+    "categoria": "automotriz",
+    "activo": true,
+    "precios": {
+      "x1": 89900,
+      "x2": 152800
+    },
+    "precios_originales": {
+      "x1": 129900,
+      "x2": 259800
+    },
+    "imagen": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/aspiradora-mano-usb.html",
+    "destacado": false,
+    "stock": 110,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Aspiradora de Mano Recargable USB | MIleGo",
+      "descripcion": "Limpieza rápida sin cables en tu auto y hogar."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 40000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 107000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "TRI-001",
+    "nombre": "Trípode Inteligente AI",
+    "slug": "tripode-inteligente-ai",
+    "descripcion": "Soporte inteligente con seguimiento de rostro por inteligencia artificial 360 grados para videos perfectos.",
+    "categoria": "tecnologia",
+    "activo": true,
+    "precios": {
+      "x1": 99900,
+      "x2": 169800
+    },
+    "precios_originales": {
+      "x1": 149900,
+      "x2": 299800
+    },
+    "imagen": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/tripode-inteligente-ai.html",
+    "destacado": false,
+    "stock": 70,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Trípode con Seguimiento de Rostro AI | MIleGo",
+      "descripcion": "Crea contenido con manos libres y encuadre inteligente."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 50000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 130000, "recomendado": true }
+    ]
+  },
+  {
+    "sku": "CER-001",
+    "nombre": "Cerradura Portátil de Seguridad",
+    "slug": "cerradura-portatil",
+    "descripcion": "Cerrojo metálico de seguridad portátil para puertas de hoteles, Airbnb y apartamentos de alquiler.",
+    "categoria": "hogar",
+    "activo": true,
+    "precios": {
+      "x1": 59900,
+      "x2": 101800
+    },
+    "precios_originales": {
+      "x1": 89900,
+      "x2": 179800
+    },
+    "imagen": "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60",
+    "landing": "/producto/cerradura-portatil.html",
+    "destacado": false,
+    "stock": 300,
+    "proveedor": "Dropi",
+    "dropi_id": "",
+    "meta": {
+      "titulo": "Cerradura Portátil de Seguridad Viajera | MIleGo",
+      "descripcion": "Seguridad adicional en segundos para cualquier puerta."
+    },
+    "combos": [
+      { "id": "x1", "nombre": "1 Unidad", "unidades": 1, "ahorro": 30000 },
+      { "id": "x2", "nombre": "Lleva 2 (Ahorro Especial)", "unidades": 2, "ahorro": 78000, "recomendado": true }
     ]
   }
 ]

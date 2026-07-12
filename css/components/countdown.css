@@ -1,0 +1,105 @@
+.countdown-section {
+  background: linear-gradient(135deg, var(--neutral-900) 0%, #1a1a2e 100%);
+  color: white;
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.countdown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  padding: 0.35rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.countdown-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: var(--weight-black);
+  margin-bottom: var(--space-2);
+}
+
+.countdown-subtitle {
+  color: rgba(255,255,255,0.6);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-8);
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+
+.countdown-number {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: var(--weight-black);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  min-width: 72px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.countdown-label {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: var(--space-2);
+}
+
+.countdown-separator {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: var(--weight-bold);
+  color: rgba(255,255,255,0.2);
+  padding-top: 0;
+  margin-top: -0.5rem;
+}
+
+.countdown-cta {
+  margin-top: var(--space-8);
+}
+
+.countdown-cta .btn {
+  font-size: var(--text-lg);
+  padding: 1rem 2.5rem;
+}
+
+.countdown-section.is-urgent .countdown-badge {
+  background: rgba(239, 68, 68, 0.25);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.countdown-section.is-urgent .countdown-number {
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}

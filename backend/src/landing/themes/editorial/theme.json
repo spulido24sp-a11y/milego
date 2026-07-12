@@ -1,0 +1,6 @@
+{
+  "id": "editorial",
+  "name": "Editorial Luxe (Magazine-Style)",
+  "conversionScore": 88,
+  "blocks": ["hero", "gallery", "benefits", "faq", "trust", "checkout"]
+}

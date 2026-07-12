@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>Landing Preview - MIleGo</title>
+<style>body{margin:0;background:#f8fafc;font-family:system-ui,sans-serif;}
+.topbar{display:flex;align-items:center;gap:12px;padding:8px 16px;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:999;}
+.topbar h2{margin:0;font-size:14px;color:#475569;font-weight:600;}
+.btn{background:#6366f1;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;}
+.btn:hover{background:#4f46e5;}
+iframe{width:100%;height:calc(100vh - 45px);border:none;}</style>
+</head>
+<body>
+<div class="topbar">
+  <h2>MIleGo — Landing Preview</h2>
+  <button class="btn" onclick="reload()">⟳ Recargar</button>
+</div>
+<iframe id="frame"></iframe>
+<script>
+async function reload() {
+  const frame = document.getElementById('frame');
+  frame.srcdoc = '<div style="padding:40px;text-align:center;color:#94a3b8;">Cargando...</div>';
+  try {
+    const token = localStorage.getItem('milego_access');
+    const res = await fetch('/api/v1/admin/products/17/preview-landing', {
+      headers: token ? { 'Authorization': 'Bearer ' + token } : {}
+    });
+    const html = await res.text();
+    frame.srcdoc = html;
+  } catch(e) {
+    frame.srcdoc = '<div style="padding:40px;text-align:center;color:#ef4444;">Error: ' + e.message + '</div>';
+  }
+}
+reload();
+</script>
+</body>
+</html>

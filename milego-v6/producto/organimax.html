@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrganiMax – Organizador de Zapatos | MIleGo V6</title>
+  <meta name="description" content="OrganiMax: el organizador ajustable de zapatos que duplica el espacio de tu clóset. Pack x6, x12 o x18. Envíos a toda Colombia.">
+  <meta name="keywords" content="organizador de zapatos, organizador de closet, ahorra espacio, OrganiMax, MIleGo, Colombia">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="OrganiMax – Organizador Ajustable de Zapatos | MIleGo">
+  <meta property="og:description" content="Duplica el espacio de tu clóset con OrganiMax. Pack x6, x12 y x18. Envíos a toda Colombia.">
+  <meta property="og:image" content="../assets/img/hero.webp">
+  <meta property="og:type" content="product">
+  <meta property="og:locale" content="es_CO">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">MI<span>leGo</span></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="container">
+      <div><i class="fa-solid fa-truck"></i> Envíos a Toda Colombia</div>
+      <div><i class="fa-solid fa-hand-holding-dollar"></i> Pago Contra Entrega</div>
+      <div><i class="fa-solid fa-shield"></i> Compra Segura</div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container">
+      <a href="../index.html" class="logo">MI<span>leGo</span></a>
+      <nav>
+        <a href="../index.html#benefits">Beneficios</a>
+        <a href="../index.html#pricing">Ofertas</a>
+        <a href="../index.html#testimonials">Opiniones</a>
+        <a href="../checkout.html">Comprar</a>
+      </nav>
+      <a href="../checkout.html" class="btn-primary header-button">Comprar Ahora</a>
+      <button class="mobile-menu" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- PRODUCT HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-image">
+          <div class="hero-glow"></div>
+          <img src="../assets/img/hero.webp" alt="OrganiMax – Organizador ajustable de zapatos" width="500" height="500">
+          <div class="floating-card top">🔥 Más Vendido</div>
+          <div class="floating-card bottom">🚚 Envío Hoy</div>
+        </div>
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span>⭐⭐⭐⭐⭐</span> Más de 2.000 clientes satisfechos
+          </div>
+          <h1>OrganiMax: El organizador de zapatos que tu clóset necesita</h1>
+          <p>Organizador ajustable, premium y fácil de instalar. Duplica el espacio de tu clóset en segundos sin comprar muebles nuevos.</p>
+
+          <div class="pricing-selector">
+            <label for="combo">Elige tu pack:</label>
+            <select id="combo">
+              <option value="6">Pack x6 – $79.900</option>
+              <option value="12" selected>Pack x12 – $129.900 (Recomendado)</option>
+              <option value="18">Pack x18 – $179.900</option>
+            </select>
+          </div>
+
+          <div class="product-price-box">
+            <span class="product-price-label">Total:</span>
+            <strong class="product-price" id="totalPrice">$129.900</strong>
+          </div>
+
+          <div class="hero-actions">
+            <a href="../checkout.html" class="btn-primary"><i class="fa-solid fa-cart-shopping"></i> Comprar Ahora</a>
+          </div>
+
+          <div class="hero-benefits">
+            <div><i class="fa-solid fa-check-circle"></i> Duplica el espacio</div>
+            <div><i class="fa-solid fa-check-circle"></i> Material Premium</div>
+            <div><i class="fa-solid fa-check-circle"></i> Envío Hoy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY THUMBNAILS -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="../assets/img/hero.webp" alt="OrganiMax vista frontal"></div>
+        <div class="gallery-item"><img src="../assets/img/after.webp" alt="OrganiMax en uso"></div>
+        <div class="gallery-item"><img src="../assets/img/before.webp" alt="Sin OrganiMax"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT DESCRIPTION -->
+  <section class="product-desc">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Descripción</span>
+        <h2>¿Qué es OrganiMax?</h2>
+        <p>Conoce el producto que está transformando los clósets de miles de colombianos.</p>
+      </div>
+      <div class="desc-content reveal">
+        <p><strong>OrganiMax</strong> es un organizador ajustable de zapatos diseñado para maximizar el espacio vertical de tu clóset. Fabricado con materiales premium de alta resistencia, te permite organizar desde zapatos y tenis hasta tacones y botas en cuestión de segundos.</p>
+        <p>Su diseño innovador se adapta a cualquier tipo de armario sin necesidad de herramientas, tornillos ni modificaciones. Simplemente colócalo, ajústalo y disfruta de un clóset perfectamente ordenado.</p>
+        <p>Disponible en packs de 6, 12 y 18 organizadores, ideal para una persona, pareja o toda la familia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="benefits">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Características</span>
+        <h2>Todo lo que OrganiMax ofrece</h2>
+        <p>Diseñado pensando en tu comodidad y el orden de tu hogar.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-expand"></i>
+          <h3>Ajustable</h3>
+          <p>Se adapta a cualquier altura de entrepaño. Ajusta el tamaño según el tipo de zapato que necesites organizar.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-gem"></i>
+          <h3>Material Premium</h3>
+          <p>Fabricado en polipropileno de alta resistencia y libre de BPA. Soporta el uso diario sin deformarse.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-bolt"></i>
+          <h3>Instalación Rápida</h3>
+          <p>No necesitas herramientas ni accesorios. Coloca, ajusta y organiza en menos de 30 segundos.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-rotate"></i>
+          <h3>Versátil</h3>
+          <p>Perfecto para zapatos, tenis, tacones, botas, accesorios y hasta productos de aseo. Úsalo como prefieras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIFICATIONS -->
+  <section class="specs">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Especificaciones</span>
+        <h2>Ficha técnica</h2>
+        <p>Todo lo que necesitas saber sobre OrganiMax.</p>
+      </div>
+      <div class="specs-table reveal">
+        <table>
+          <tr><td>Material</td><td>Polipropileno virgen de alta resistencia, libre de BPA</td></tr>
+          <tr><td>Dimensiones (armado)</td><td>30 cm x 25 cm x 20 cm (cada organizador)</td></tr>
+          <tr><td>Ajuste de altura</td><td>De 5 cm a 20 cm por compartimento</td></tr>
+          <tr><td>Capacidad por organizador</td><td>1 par de zapatos (hasta talla 46)</td></tr>
+          <tr><td>Colores disponibles</td><td>Blanco / Gris / Negro</td></tr>
+          <tr><td>Peso por organizador</td><td>250 g</td></tr>
+          <tr><td>Garantía</td><td>30 días de satisfacción o tu dinero devuelto</td></tr>
+          <tr><td>Incluye</td><td>Instrucciones de uso, guía rápida, soporte postventa</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="before-after">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Antes y Después</span>
+        <h2>La transformación que tu clóset necesita</h2>
+        <p>Mira la diferencia que OrganiMax hace en segundos.</p>
+      </div>
+      <div class="compare-wrapper">
+        <div class="compare-card reveal">
+          <img src="../assets/img/before.webp" alt="Antes – Clóset desorganizado" width="400" height="400">
+          <div class="overlay">
+            <h3>Antes</h3>
+            <ul>
+              <li>✗ Desorden total</li>
+              <li>✗ Espacio desperdiciado</li>
+              <li>✗ Difícil de encontrar</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-arrow reveal"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="compare-card reveal">
+          <img src="../assets/img/after.webp" alt="Después – Clóset organizado con OrganiMax" width="400" height="400">
+          <div class="overlay">
+            <h3>Después</h3>
+            <ul>
+              <li>✓ Todo en su lugar</li>
+              <li>✓ Espacio duplicado</li>
+              <li>✓ Fácil acceso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Opiniones</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+        <p>Más de 2.000 colombianos ya transformaron su clóset con OrganiMax.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="../assets/img/client1.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>María García</h4>
+              <span>Bogotá, Cundinamarca</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Compré el pack x12 para mi familia y fue la mejor inversión. Ahora cada quien tiene su espacio y el clóset luce impecable. La calidad es increíble.</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="../assets/img/client2.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>Carlos Martínez</h4>
+              <span>Medellín, Antioquia</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Los organizadores son súper resistentes y fáciles de instalar. Organizar mis tenis nunca había sido tan fácil. Pediré otro pack para mis botas.</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="../assets/img/client3.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>Ana Rodríguez</h4>
+              <span>Cali, Valle del Cauca</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Pedí el pack x18 para toda la casa y transformó cada clóset. Llegó rápido y el pago contra entrega es súper confiable. 100% recomendado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICONS ROW -->
+  <section class="icons-row">
+    <div class="container">
+      <div class="icon-item">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h4>Envíos Rápidos</h4>
+        <p>Entregas en 2-5 días hábiles</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-lock"></i>
+        <h4>Compra Segura</h4>
+        <p>Datos protegidos y cifrados</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        <h4>Pago al Recibir</h4>
+        <p>Solo pagas cuando recibes</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-headset"></i>
+        <h4>Soporte</h4>
+        <p>Atención al cliente 24/7</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>FAQ</span>
+        <h2>Preguntas Frecuentes</h2>
+        <p>Resolvemos tus dudas sobre OrganiMax.</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item reveal">
+          <button>¿Cómo se instala OrganiMax? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Es muy sencillo. Solo despliega el organizador, ajústalo a la altura deseada y colócalo en el entrepaño de tu clóset. No necesitas herramientas, tornillos ni pegamento. En menos de 30 segundos tu zapato estará perfectamente organizado.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Qué tipo de zapatos puedo organizar? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>OrganiMax es compatible con todo tipo de calzado: tenis, zapatos formales, tacones, botas, sandalias y hasta pantuflas. Soporta tallas hasta la 46 y cada compartimento se ajusta a la altura del zapato.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Cuánto peso soporta cada organizador? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Cada organizador soporta hasta 3 kg, suficiente para un par de zapatos de cualquier material. El polipropileno virgen de alta resistencia garantiza que no se deforme ni se rompa con el uso diario.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Puedo lavar o limpiar los organizadores? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Sí, los organizadores se limpian fácilmente con un paño húmedo y jabón suave. No requieren cuidados especiales. El material es resistente al agua y no absorbe olores, manteniendo tu clóset siempre fresco.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner reveal">
+    <div class="container">
+      <div class="cta-content">
+        <h2>¡Transforma tu clóset hoy!</h2>
+        <p>Más de 2.000 colombianos ya organizaron su hogar con OrganiMax. No esperes más.</p>
+        <a href="../checkout.html" class="btn-primary"><i class="fa-solid fa-cart-shopping"></i> Comprar Ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2>MI<span>leGo</span></h2>
+          <p>Tienda colombiana premium de productos para el hogar. Transformamos tu espacio con calidad y diseño. +2.000 clientes satisfechos en todo el país.</p>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cambios y Devoluciones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Atención</h4>
+          <ul>
+            <li><a href="tel:+573000000000"><i class="fa-solid fa-phone"></i> +57 300 000 0000</a></li>
+            <li><a href="mailto:hola@milego.co"><i class="fa-solid fa-envelope"></i> hola@milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2026 MIleGo. Todos los derechos reservados. Hecho con ❤️ en Colombia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="#" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTop" aria-label="Volver arriba">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="../app.js"></script>
+</body>
+</html>

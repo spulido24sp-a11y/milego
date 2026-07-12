@@ -1,0 +1,73 @@
+<h2>Sistema de Bloques — Diseño</h2>
+<p class="subtitle">Cada bloque tiene: schema + render() + preview()</p>
+
+<div class="section">
+  <h3>Arquitectura de datos</h3>
+  <p>Cada landing = un JSON con:</p>
+  <pre style="background:rgba(255,255,255,0.05);padding:1rem;border-radius:0.5rem;font-size:0.8rem;overflow-x:auto;">
+{
+  "id": "uuid",
+  "product_slug": "organimax",
+  "sales_hypothesis": { ... },
+  "blocks": [
+    { "type": "hero", "props": { "headline": "...", "subheadline": "...", ... } },
+    { "type": "problem", "props": { ... } },
+    { "type": "transformation", "props": { ... } },
+    { "type": "benefits", "props": { ... } },
+    { "type": "testimonials", "props": { ... } },
+    { "type": "offer", "props": { ... } },
+    { "type": "guarantee", "props": { ... } },
+    { "type": "faq", "props": { ... } },
+    { "type": "cta", "props": { ... } }
+  ],
+  "seo": { "title": "...", "description": "...", "og_image": "..." },
+  "published": true,
+  "version": 1
+}
+  </pre>
+</div>
+
+<div class="section">
+  <h3>Bloques disponibles (MVP)</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+    <div style="padding:0.5rem;background:rgba(99,102,241,0.1);border-radius:0.5rem;font-size:0.85rem;">🔷 Hero</div>
+    <div style="padding:0.5rem;background:rgba(245,158,11,0.1);border-radius:0.5rem;font-size:0.85rem;">🔶 Problem</div>
+    <div style="padding:0.5rem;background:rgba(16,185,129,0.1);border-radius:0.5rem;font-size:0.85rem;">🟢 Transformation</div>
+    <div style="padding:0.5rem;background:rgba(239,68,68,0.1);border-radius:0.5rem;font-size:0.85rem;">🔴 Enemy</div>
+    <div style="padding:0.5rem;background:rgba(139,92,246,0.1);border-radius:0.5rem;font-size:0.85rem;">🟣 Benefits</div>
+    <div style="padding:0.5rem;background:rgba(6,182,212,0.1);border-radius:0.5rem;font-size:0.85rem;">🔵 Testimonials</div>
+    <div style="padding:0.5rem;background:rgba(249,115,22,0.1);border-radius:0.5rem;font-size:0.85rem;">🟠 Offer/Pricing</div>
+    <div style="padding:0.5rem;background:rgba(20,184,166,0.1);border-radius:0.5rem;font-size:0.85rem;">🟢 Guarantee</div>
+    <div style="padding:0.5rem;background:rgba(236,72,153,0.1);border-radius:0.5rem;font-size:0.85rem;">🩷 FAQ</div>
+    <div style="padding:0.5rem;background:rgba(99,102,241,0.1);border-radius:0.5rem;font-size:0.85rem;">🔷 CTA</div>
+    <div style="padding:0.5rem;background:rgba(148,163,184,0.1);border-radius:0.5rem;font-size:085rem;">⚪ Footer</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Diagrama de flujo</h3>
+  <div class="placeholder" style="padding:2rem;text-align:center;">
+    <pre style="font-size:0.75rem;line-height:1.6;">
+LIAM (hipótesis de venta)
+        │
+        ▼
+  Genera JSON de bloques
+        │
+        ▼
+  Backend: Block Engine
+   ┌─────────────────────┐
+   │  Validate schema    │
+   │  Render HTML blocks │
+   │  Inject SEO meta    │
+   │  Cache result       │
+   └─────────────────────┘
+        │
+        ▼
+  Landing servida en /p/{slug}
+        │
+        ▼
+  Admin: puede editar JSON
+  de cada bloque (formularios)
+    </pre>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+#sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+#sticky-cta.is-visible {
+  transform: translateY(0);
+}
+
+.sticky-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sticky-cta-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.sticky-cta-label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  display: none;
+}
+
+.sticky-cta-price {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-black);
+  color: var(--brand-primary);
+  white-space: nowrap;
+}
+
+.sticky-cta-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #25d366;
+  color: white;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.sticky-cta-wa:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+}
+
+.sticky-cta .btn {
+  flex-shrink: 0;
+  padding: 0.65rem 1.5rem;
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 640px) {
+  #sticky-cta {
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .sticky-cta-label {
+    display: block;
+  }
+
+  .sticky-cta .btn {
+    padding: 0.75rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #sticky-cta {
+    display: none;
+  }
+}

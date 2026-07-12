@@ -10,7 +10,9 @@
     "migrate:rollback": "knex migrate:rollback --knexfile knexfile.cjs",
     "seed": "knex seed:run --knexfile knexfile.cjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:dropi": "node src/integrations/dropi/test-connectivity.js",
+    "test:watch": "vitest",
+    "benchmark": "node src/integrations/dropi/benchmark.js"
   },
   "dependencies": {
     "express": "^4.18",

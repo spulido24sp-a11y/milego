@@ -16,6 +16,10 @@ export async function auditHandler(eventData, meta) {
     if (recent) return;
   }
 
+  if (!meta.entityType || !meta.entityId) {
+    return;
+  }
+
   await repo.create({
     user_id: meta.userId || null,
     store_id: meta.storeId,

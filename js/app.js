@@ -1,3 +1,4 @@
+import { loadConfig } from './modules/config.js';
 import { initLoader } from './modules/loader.js';
 import { initNavigation } from './modules/navigation.js';
 import { initScrollReveal } from './modules/scrollReveal.js';
@@ -10,6 +11,8 @@ import { sendToWebhook } from './modules/webhook.js';
 import { addOrder, markSynced, processQueue } from './modules/orderQueue.js';
 import { initReviewsCarousel } from './modules/reviewsCarousel.js';
 import { initVideoPopup } from './modules/videoPopup.js';
+import { initCountdown } from './modules/countdown.js';
+import { initStickyCta } from './modules/sticky-cta.js';
 import { loadProducts, getActiveProducts, getComboPrice } from './modules/products.js';
 import { $, on, createEl } from './utils/dom.js';
 import { formatCurrency, getUrlParam } from './utils/format.js';
@@ -23,6 +26,8 @@ async function init() {
   registerSW();
   info('App initialized');
 
+  await loadConfig();
+
   try {
     products = await loadProducts();
     info('Products loaded', { count: products.length });
@@ -31,9 +36,11 @@ async function init() {
   }
 
   initLoader();
+  initCatalog();
   initNavigation();
   initScrollReveal();
   initCounters();
+  initCountdown();
   initFaq();
   initWhatsApp();
   initTheme();
@@ -43,6 +50,7 @@ async function init() {
   initVideoPopup();
   initCheckoutForm();
   initGraciasPage();
+  initStickyCta();
   processQueue(sendToWebhook);
   trackPageView(document.title);
   initPricingCtas();
@@ -58,117 +66,14 @@ function registerSW() {
   }
 }
 
-function getPriceData(comboId) {
-  const p = products?.[0];
-  if (!p) return { price: 0 };
-  const keys = Object.keys(p.precios);
-  const key = keys[parseInt(comboId) - 1] || keys[0];
-  return { price: p.precios[key], original: p.precios_originales?.[key] || 0, key };
-}
-
-function getComboLabel(comboId) {
-  const p = products?.[0];
-  if (!p?.combos) return { nombre: 'OrganiMax', unidades: 0 };
-  const c = p.combos[parseInt(comboId) - 1];
-  return c || { nombre: 'OrganiMax', unidades: 0 };
-}
-
 function initCheckoutForm() {
   const form = $('#orderForm');
   if (!form) return;
-
-  trackBeginCheckout($('#combo')?.value || '2');
-
-  const combo = $('#combo');
-  const totalPrice = $('#totalPrice');
-
-  function updatePrice() {
-    if (!combo || !totalPrice) return;
-    const comboId = combo.value || '2';
-    const pd = getPriceData(comboId);
-    totalPrice.value = pd.price;
-    const display = document.getElementById('priceDisplay');
-    if (display) display.textContent = pd.price ? formatCurrency(pd.price) : '';
-  }
-
-  if (combo) {
-    on(combo, 'change', updatePrice);
-    updatePrice();
-  }
-
-  on(form, 'submit', async (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = 'Procesando...'; }
-
-    const txnId = `MG-${Date.now()}`;
-    const pd = getPriceData(form.combo?.value);
-    const cl = getComboLabel(form.combo?.value);
-
-    const data = {
-      orderId: txnId,
-      sku: products?.[0]?.sku || '',
-      nombre: form.nombre?.value?.trim(),
-      email: form.email?.value?.trim(),
-      telefono: form.telefono?.value?.trim(),
-      departamento: form.departamento?.value,
-      ciudad: form.ciudad?.value,
-      direccion: form.direccion?.value?.trim(),
-      combo: form.combo?.value,
-      comboName: cl.nombre,
-      comboPrice: pd.price,
-      total: pd.price,
-      producto: products?.[0]?.nombre || 'OrganiMax',
-      fecha: new Date().toISOString(),
-      fuente: getUrlParam('utm_source') || getUrlParam('ref') || 'directo',
-    };
-
-    addOrder(data);
-    info('Order saved to localStorage', { txnId, combo: data.combo });
-
-    try {
-      await sendToWebhook(data);
-      markSynced(txnId);
-      info('Webhook sent successfully', { txnId });
-      trackPurchase(txnId, data.combo);
-
-      const params = new URLSearchParams({
-        nombre: data.nombre, email: data.email,
-        combo: data.combo, total: pd.price, txn: txnId,
-      });
-      window.location.href = `/gracias.html?${params}`;
-    } catch (err) {
-      if (btn) { btn.disabled = false; btn.textContent = 'Intentar de nuevo'; }
-    }
-  });
 }
 
 function initGraciasPage() {
   const graciasContainer = $('#gracias-data');
   if (!graciasContainer) return;
-
-  const nombre = getUrlParam('nombre') || 'Cliente';
-  const combo = getUrlParam('combo');
-  const total = getUrlParam('total');
-  const txn = getUrlParam('txn');
-
-  const cl = getComboLabel(combo);
-  const comboLabel = cl.nombre || 'OrganiMax';
-
-  if (combo) trackPurchase(txn || '', combo);
-
-  const safeNombre = document.createTextNode(decodeURIComponent(nombre));
-  graciasContainer.innerHTML = '';
-  graciasContainer.append(
-    createEl('p', {}, [
-      createEl('strong', {}, [safeNombre]),
-      document.createTextNode(', ¡tu pedido ha sido confirmado!'),
-    ]),
-    createEl('p', {}, [document.createTextNode(`Combo: ${comboLabel}`)]),
-    createEl('p', {}, [document.createTextNode(`Total: ${total ? formatCurrency(parseInt(total)) : ''}`)]),
-    createEl('p', {}, [document.createTextNode(`Transacción: ${txn || 'N/A'}`)]),
-    createEl('p', { className: 'text-sm text-muted', style: 'margin-top:1rem;' }, [document.createTextNode('Recibirás la confirmación en tu correo electrónico.')]),
-  );
 }
 
 function initPricingCtas() {
@@ -176,6 +81,43 @@ function initPricingCtas() {
     const match = a.getAttribute('href').match(/combo=(\d)/);
     if (match) on(a, 'click', () => trackAddToCart(match[1]));
   });
+}
+
+function initCatalog() {
+  const grid = $('#catalog-grid');
+  if (!grid) return;
+
+  const activeProducts = getActiveProducts();
+  if (activeProducts.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-secondary);grid-column:1/-1;">No hay productos disponibles en este momento.</div>';
+    return;
+  }
+
+  grid.innerHTML = activeProducts.map(p => {
+    const priceKey = Object.keys(p.precios)[0] || 'x1';
+    const price = p.precios[priceKey];
+    const originalPrice = p.precios_originales?.[priceKey] || price * 1.5;
+    const badge = p.destacado ? '<span class="product-badge">Destacado</span>' : '';
+
+    return `
+      <div class="product-card" data-reveal>
+        <div class="product-image-container">
+          ${badge}
+          <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span style="font-size: 0.75rem; color: var(--brand-primary); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">${p.categoria}</span>
+          <h3 class="product-title">${p.nombre}</h3>
+          <p class="product-desc">${p.descripcion}</p>
+          <div class="product-price-row">
+            <span class="product-price-current">${formatCurrency(price)}</span>
+            <span class="product-price-old">${formatCurrency(originalPrice)}</span>
+          </div>
+          <a href="${p.landing}" class="btn btn-primary btn-block" style="margin-top: auto; justify-content: center;"><i class="fa-solid fa-eye"></i> Ver Oferta</a>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 if (document.readyState === 'loading') {

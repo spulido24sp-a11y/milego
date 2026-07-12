@@ -1,0 +1,14 @@
+<div class="theme-pagepilot-faq">
+  <div class="pagepilot-faq-box">
+    <h3>¿Preguntas sobre el producto?</h3>
+    <div class="faq-container">
+      {{#each FAQ_ITEMS}}
+      <div class="faq-item">
+        <button class="faq-trigger">{{faqQuestion}} <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-content"><div class="faq-content-inner">{{faqAnswer}}</div></div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+

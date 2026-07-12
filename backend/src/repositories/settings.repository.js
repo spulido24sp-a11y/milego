@@ -33,4 +33,23 @@ export class SettingsRepository {
       });
     }
   }
+
+  async getByKey(storeId, key) {
+    return db('settings').where({ store_id: storeId, key }).first();
+  }
+
+  async remove(storeId, key) {
+    return db('settings').where({ store_id: storeId, key }).del();
+  }
+
+  async getGrouped(storeId) {
+    const rows = await db('settings').where({ store_id: storeId }).orderBy('group_name').orderBy('key');
+    const grouped = {};
+    for (const row of rows) {
+      const g = row.group_name || 'general';
+      if (!grouped[g]) grouped[g] = [];
+      grouped[g].push(row);
+    }
+    return grouped;
+  }
 }

@@ -2,93 +2,232 @@
 <html lang="es-CO">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedido Confirmado – OrganiMax | MIleGo V6</title>
-  <meta name="description" content="Tu pedido de OrganiMax ha sido recibido con éxito. Te contactaremos para coordinar la entrega.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>¡Pedido Confirmado! — MIleGo</title>
+  <meta name="description" content="Tu pedido ha sido confirmado. Te contactaremos por WhatsApp para coordinar la entrega.">
   <meta name="robots" content="noindex, nofollow">
-
-  <meta property="og:title" content="Pedido Confirmado – OrganiMax | MIleGo">
-  <meta property="og:description" content="Gracias por tu compra. Recibirás tu OrganiMax pronto.">
-  <meta property="og:image" content="assets/img/hero.webp">
-
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://hook.chatproa.com; frame-src 'self' https://www.youtube.com; manifest-src 'self'">
-  <link rel="canonical" href="https://milego.co/gracias.html">
-
+  <meta property="og:title" content="Pedido Confirmado — MIleGo">
+  <meta property="og:description" content="Gracias por tu compra. Recibirás tu pedido pronto.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Outfit',system-ui,sans-serif;background:#0f1117;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1.5rem;-webkit-font-smoothing:antialiased;}
+    .gc{max-width:520px;width:100%;}
+    .gc-header{text-align:center;margin-bottom:2rem;}
+    .gc-check{font-size:3.5rem;margin-bottom:1rem;animation:gcPop .5s ease;}
+    @keyframes gcPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+    .gc h1{font-size:1.75rem;font-weight:900;color:#fff;margin-bottom:0.5rem;}
+    .gc-sub{color:#94a3b8;font-size:0.95rem;line-height:1.5;}
+    .gc-order{color:#10b981;font-weight:700;font-size:1rem;margin-top:0.5rem;}
+    .gc-card{background:#1a1d28;border:1px solid #2d3140;border-radius:20px;padding:2rem 1.5rem;}
+    .gc-detail-row{display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #2d3140;font-size:0.9rem;}
+    .gc-detail-row:last-child{border-bottom:none;}
+    .gc-detail-label{color:#64748b;}
+    .gc-detail-value{color:#e2e8f0;font-weight:600;}
+    .gc-eta{display:flex;align-items:center;gap:0.75rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);border-radius:12px;padding:1rem;margin-top:1.5rem;font-size:0.9rem;}
+    .gc-eta-icon{font-size:1.5rem;}
+    .gc-eta-text strong{color:#10b981;}
+    .gc-btn{display:flex;align-items:center;justify-content:center;gap:0.75rem;width:100%;background:linear-gradient(135deg,#25d366,#1da955);color:#fff;text-decoration:none;padding:1rem 2rem;border-radius:12px;font-weight:700;font-size:1.05rem;margin-top:1.5rem;transition:opacity .2s,transform .2s;border:none;cursor:pointer;}
+    .gc-btn:hover{opacity:.92;transform:translateY(-1px);}
+    .gc-btn i{font-size:1.25rem;}
+    .gc-back{display:block;text-align:center;color:#64748b;text-decoration:none;font-size:0.85rem;margin-top:1.25rem;}
+    .gc-back:hover{color:#94a3b8;}
+    .gc-badges{display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;}
+    .gc-badge{display:flex;align-items:center;gap:0.35rem;color:#64748b;font-size:0.75rem;}
+    .gc-loading{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:3rem 0;}
+    .gc-spinner{width:40px;height:40px;border:3px solid #2d3140;border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:480px){.gc-card{padding:1.5rem 1.25rem;}}
+  </style>
 </head>
 <body>
-
-  <div id="loader">
-    <div class="loader-logo">MI<span>leGo</span></div>
-    <div class="loader-bar"></div>
+  <div class="gc" id="gracias-app">
+    <div class="gc-loading" id="gc-loading">
+      <div class="gc-spinner"></div>
+      <p style="color:#94a3b8;font-size:0.9rem;">Verificando tu pedido...</p>
+    </div>
   </div>
 
-  <header class="header" id="header">
-    <div class="container header-container">
-      <a href="/" class="header-logo">MI<span>leGo</span></a>
-      <nav class="header-nav">
-        <a href="index.html#benefits">Beneficios</a>
-        <a href="index.html#pricing">Ofertas</a>
-        <a href="index.html#testimonials">Opiniones</a>
-        <a href="checkout.html">Comprar</a>
-      </nav>
-      <a href="checkout.html" class="btn btn-primary btn-sm">Comprar Ahora</a>
-      <button id="themeToggle" class="header-theme-toggle" aria-label="Cambiar tema"><i class="fa-solid fa-sun"></i></button>
-      <button class="header-mobile-toggle" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
-    </div>
-  </header>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const orderNumber = params.get('order');
+      const nombre = params.get('nombre') || 'Cliente';
+      const total = params.get('total');
+      const paymentMethod = params.get('payment_method') || 'cash_on_delivery';
+      const isCard = paymentMethod === 'credit_card';
 
-  <main>
-  <section class="checkout">
-    <div class="container">
-      <div class="checkout-card" style="text-align:center;">
-        <div style="font-size:4rem;color:var(--brand-accent);margin-bottom:var(--space-4);">
-          <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <h1 class="h2 mb-4">¡Pedido Recibido con Éxito!</h1>
-        <div id="gracias-data" class="text-sm text-muted mb-6" style="line-height:var(--leading-relaxed);"></div>
-        <a href="index.html" class="btn btn-secondary btn-block">Volver a la Tienda</a>
-      </div>
-    </div>
-  </section>
+      if (!orderNumber) {
+        document.getElementById('gc-loading').innerHTML = `
+          <div style="font-size:3rem;margin-bottom:0.5rem;">❌</div>
+          <h2 style="color:#fff;">Pedido no encontrado</h2>
+          <p style="color:#94a3b8;font-size:0.9rem;text-align:center;">No pudimos verificar tu pedido. Si tienes dudas, contáctanos por WhatsApp.</p>
+          <a href="/" style="margin-top:1.5rem;display:inline-block;padding:0.75rem 2rem;background:#6366f1;color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:0.9rem;">Volver a la tienda</a>
+        `;
+        return;
+      }
 
-  </main>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>MI<span>leGo</span></h3>
-          <p>Tienda colombiana premium de productos para el hogar.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Empresa</h4>
-          <ul>
-            <li><a href="#">Sobre Nosotros</a></li>
-            <li><a href="#">Términos y Condiciones</a></li>
-            <li><a href="#">Política de Privacidad</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Atención</h4>
-          <ul>
-            <li><a href="mailto:hola@milego.co">hola@milego.co</a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2026 MIleGo. Todos los derechos reservados.
-      </div>
-    </div>
-  </footer>
+      const app = document.getElementById('gracias-app');
 
-  <script src="config.js"></script>
-  <script type="module" src="js/app.js"></script>
+      function renderPage(o) {
+        const orderId = o ? o.order_number : orderNumber;
+        const products = o && o.items ? o.items.map(function(i) { return i.product_name + ' x' + i.quantity; }).join(', ') : 'OrganiMax';
+        const totalFormatted = o && o.total
+          ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(o.total)
+          : (total ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(parseInt(total)) : '');
+        const customerPhone = o ? (o.customer_phone || '') : '';
+        const cleanPhone = customerPhone.replace(/[^0-9]/g, '');
+        const waNumber = cleanPhone ? '57' + cleanPhone : '573209898615';
+        const date = new Date().toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        const etaDays = Math.floor(Math.random() * 3) + 3;
+        const etaDate = new Date(Date.now() + etaDays * 86400000);
+        const etaStr = etaDate.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' });
+
+        const safeName = document.createTextNode(decodeURIComponent(nombre)).textContent;
+
+        const paymentLabel = isCard ? 'Tarjeta débito/crédito' : 'Contra Entrega';
+        const paymentIcon = isCard ? '💳' : '🚚';
+        const paymentTitle = isCard ? '¡Pago Recibido!' : '¡Pedido Confirmado!';
+        const paymentSub = isCard
+          ? 'Tu pago ha sido procesado con éxito.'
+          : 'Hola <strong>'+safeName+'</strong>, tu pedido ha sido recibido con éxito.';
+        const paymentBadge = isCard
+          ? '<span class="gc-badge"><i class="fa-solid fa-credit-card"></i> Pago con Tarjeta</span>'
+          : '<span class="gc-badge"><i class="fa-solid fa-hand-holding-dollar"></i> Contra Entrega</span>';
+
+        app.innerHTML = `
+            <div class="gc-header">
+              <div class="gc-check">${isCard ? '💳' : '🎉'}</div>
+              <h1>${paymentTitle}</h1>
+              <p class="gc-sub">${paymentSub}</p>
+              <div class="gc-order">📦 #${orderId}</div>
+            </div>
+            <div class="gc-card">
+              <div class="gc-detail-row">
+                <span class="gc-detail-label">Producto</span>
+                <span class="gc-detail-value">${products}</span>
+              </div>
+              <div class="gc-detail-row">
+                <span class="gc-detail-label">Total</span>
+                <span class="gc-detail-value">${totalFormatted}</span>
+              </div>
+              <div class="gc-detail-row">
+                <span class="gc-detail-label">Pago</span>
+                <span class="gc-detail-value">${paymentLabel}</span>
+              </div>
+              <div class="gc-detail-row">
+                <span class="gc-detail-label">Fecha</span>
+                <span class="gc-detail-value">${date}</span>
+              </div>
+              <div class="gc-eta">
+                <span class="gc-eta-icon">${paymentIcon}</span>
+                <div class="gc-eta-text">${isCard ? 'Recibirás actualizaciones del envío por WhatsApp.' : 'Tiempo estimado de entrega: <strong>'+etaStr+'</strong>'}</div>
+              </div>
+            </div>
+            <a href="https://wa.me/${waNumber}?text=${encodeURIComponent('Hola! Soy ' + safeName + ', acabo de hacer el pedido #' + orderId + (isCard ? ' y ya realicé el pago' : ' y quiero confirmar los detalles de entrega 🚚'))}" target="_blank" rel="noopener" class="gc-btn">
+              <i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp
+            </a>
+            <a href="/" class="gc-back">← Volver a la tienda</a>
+            <div class="gc-badges">
+              <span class="gc-badge"><i class="fa-solid fa-lock"></i> Pago Seguro</span>
+              ${paymentBadge}
+              <span class="gc-badge"><i class="fa-solid fa-shield-halved"></i> Garantía 30d</span>
+              <span class="gc-badge"><i class="fa-solid fa-truck"></i> Envío Gratis</span>
+            </div>
+          `;
+      }
+
+      function renderPending() {
+        app.innerHTML = `
+            <div class="gc-header">
+              <div class="gc-check" style="font-size:2.5rem;">⏳</div>
+              <h1>Procesando tu pago</h1>
+              <p class="gc-sub">Estamos verificando tu pago, esto tomará solo unos segundos.</p>
+              <div class="gc-order">📦 #${orderNumber}</div>
+            </div>
+            <div class="gc-card" style="text-align:center;padding:2rem;">
+              <div class="gc-spinner" style="margin:0 auto 1rem;"></div>
+              <p style="color:#94a3b8;font-size:0.9rem;">No cierres esta página mientras confirmamos tu pago...</p>
+            </div>
+            <a href="https://wa.me/573209898615?text=${encodeURIComponent('Hola! Quiero saber el estado de mi pedido #' + orderNumber)}" target="_blank" rel="noopener" class="gc-btn">
+              <i class="fa-brands fa-whatsapp"></i> Contactar por WhatsApp
+            </a>
+            <a href="/" class="gc-back">← Volver a la tienda</a>
+          `;
+      }
+
+      function renderFailed() {
+        app.innerHTML = `
+            <div class="gc-header">
+              <div class="gc-check">❌</div>
+              <h1>Pago no completado</h1>
+              <p class="gc-sub">El pago con tu tarjeta no pudo ser procesado. Tu pedido está guardado.</p>
+              <div class="gc-order">📦 #${orderNumber}</div>
+            </div>
+            <div class="gc-card">
+              <p style="color:#94a3b8;font-size:0.9rem;text-align:center;margin-bottom:1rem;">
+                Puedes intentar de nuevo o contactarnos para ayudarte con el pago.
+              </p>
+            </div>
+            <a href="/" class="gc-btn" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">
+              <i class="fa-solid fa-arrow-left"></i> Volver a la tienda
+            </a>
+            <a href="https://wa.me/573209898615?text=${encodeURIComponent('Hola! Necesito ayuda con mi pago del pedido #' + orderNumber)}" target="_blank" rel="noopener" class="gc-btn" style="margin-top:0.5rem;">
+              <i class="fa-brands fa-whatsapp"></i> Ayuda por WhatsApp
+            </a>
+            <a href="/" class="gc-back">← Volver a la tienda</a>
+          `;
+      }
+
+      if (isCard) {
+        renderPending();
+
+        var pollCount = 0;
+        var pollInterval = setInterval(function() {
+          pollCount++;
+          fetch('/api/v1/wompi/payment-status/0?order=' + encodeURIComponent(orderNumber))
+            .then(function(r) { return r.json(); })
+            .then(function(resp) {
+              if (!resp.success) return;
+              var status = resp.data.order.payment_status;
+              if (status === 'completed') {
+                clearInterval(pollInterval);
+                fetch('/api/v1/orders/by-number/' + encodeURIComponent(orderNumber))
+                  .then(function(r) { return r.json(); })
+                  .then(function(d) {
+                    renderPage(d.success ? d.data : null);
+                  })
+                  .catch(function() {
+                    renderPage(null);
+                  });
+              } else if (status === 'failed') {
+                clearInterval(pollInterval);
+                renderFailed();
+              }
+            })
+            .catch(function() {});
+
+          if (pollCount > 30) {
+            clearInterval(pollInterval);
+            renderPage(null);
+          }
+        }, 3000);
+      } else {
+        fetch('/api/v1/orders/by-number/' + encodeURIComponent(orderNumber))
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            renderPage(data.success ? data.data : null);
+          })
+          .catch(function() {
+            renderPage(null);
+          });
+      }
+    })();
+  </script>
 </body>
 </html>

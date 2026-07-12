@@ -1,0 +1,29 @@
+<h2>Confirmación de arquitectura</h2>
+<p class="subtitle">MVP Conversional seleccionado ✅</p>
+
+<div style="margin:2rem 0;">
+  <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:rgba(16,185,129,0.1);border-radius:0.75rem;margin-bottom:1rem;">
+    <span style="font-size:1.5rem;">✅</span>
+    <div>
+      <strong>MVP Conversional</strong>
+      <p style="font-size:0.85rem;margin:0;color:rgba(255,255,255,0.6);">Sistema de bloques funcional. LIAM genera JSON. Landing se renderiza desde backend. Sin editor visual por ahora.</p>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Backend Engine puro</h3>
+      <p>LIAM genera JSON de bloques → Backend renderiza HTML → Página servida. El admin solo muestra el JSON. Más simple de construir.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)" style="border-color:rgba(99,102,241,0.4);">
+    <div class="letter" style="background:var(--accent);">C</div>
+    <div class="content">
+      <h3>Híbrido (Recomendado)</h3>
+      <p>Backend renderiza HTML. Admin tiene editor de bloques (sin drag & drop — formularios JSON estructurados). LIAM puede modificar vía API. Preparado para editor visual en V2.</p>
+    </div>
+  </div>
+</div>

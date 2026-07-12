@@ -1,0 +1,6 @@
+{
+  "id": "pagepilot",
+  "name": "PagePilot Classic (Direct-Sale)",
+  "conversionScore": 92,
+  "blocks": ["hero", "gallery", "benefits", "offer", "faq", "trust", "checkout"]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "minimal",
+  "name": "Minimal Clean (Lifestyle)",
+  "conversionScore": 90,
+  "blocks": ["hero", "benefits", "gallery", "faq", "checkout"]
+}

@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://hook.chatproa.com; frame-src 'self' https://www.youtube.com; manifest-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' http://localhost:* http://127.0.0.1:* https://hook.chatproa.com; frame-src 'self' https://www.youtube.com; manifest-src 'self'">
   <link rel="canonical" href="https://milego.co/">
 
   <script type="application/ld+json">
@@ -162,6 +162,18 @@
     </div>
   </section>
 
+  <section id="catalog" class="section" style="background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <h2>Nuestros Productos Ganadores</h2>
+        <p>Soluciones inteligentes de alta calidad con envíos a toda Colombia y pago contra entrega.</p>
+      </div>
+      <div class="products-grid" id="catalog-grid" data-reveal>
+        <div style="text-align:center;padding:3rem;color:var(--text-secondary);grid-column:1/-1;">Cargando catálogo...</div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="section-header" data-reveal>
@@ -177,6 +189,33 @@
           <img src="assets/img/after.webp" alt="Después – Clóset organizado con OrganiMax" width="400" height="400" loading="lazy">
           <div class="before-after-label after">Después – Espacio duplicado</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="countdown-section" class="countdown-section section">
+    <div class="container">
+      <div class="countdown-badge"><i class="fa-solid fa-bolt"></i> Oferta por tiempo limitado</div>
+      <h2 class="countdown-title">¡No dejes pasar esta oportunidad!</h2>
+      <p class="countdown-subtitle">Esta oferta especial termina en:</p>
+      <div class="countdown-timer">
+        <div class="countdown-unit">
+          <div class="countdown-number" id="countdown-hours">00</div>
+          <span class="countdown-label">Horas</span>
+        </div>
+        <span class="countdown-separator">:</span>
+        <div class="countdown-unit">
+          <div class="countdown-number" id="countdown-minutes">00</div>
+          <span class="countdown-label">Minutos</span>
+        </div>
+        <span class="countdown-separator">:</span>
+        <div class="countdown-unit">
+          <div class="countdown-number" id="countdown-seconds">00</div>
+          <span class="countdown-label">Segundos</span>
+        </div>
+      </div>
+      <div class="countdown-cta">
+        <a href="#pricing" class="btn btn-primary btn-lg"><i class="fa-solid fa-cart-shopping"></i> Aprovechar Oferta</a>
       </div>
     </div>
   </section>
@@ -333,52 +372,19 @@
     </div>
   </section>
 
-  <section id="checkout" class="section">
-    <div class="container">
+  <section id="checkout-cta" class="section" style="background:var(--bg-secondary);border-top:1px solid var(--border-color);">
+    <div class="container" style="text-align:center;">
       <div class="section-header" data-reveal>
-        <h2>Completa tu pedido</h2>
-        <p>Recibe OrganiMax en la puerta de tu casa. Paga contra entrega.</p>
+        <h2>¡Asegura tu OrganiMax hoy!</h2>
+        <p>Pago contra entrega. Envío a toda Colombia. 30 días de garantía.</p>
       </div>
-      <div class="checkout-card" style="max-width:540px;margin:0 auto;">
-        <form id="orderForm">
-          <div class="form-group">
-            <label class="form-label" for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" class="form-input" placeholder="Ej: María García" autocomplete="name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="telefono">Celular</label>
-            <input type="tel" id="telefono" class="form-input" placeholder="Ej: 300 123 4567" autocomplete="tel" required>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="departamento">Departamento</label>
-              <select id="departamento" class="form-select" autocomplete="address-level1" required><option value="">Selecciona...</option></select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="ciudad">Ciudad</label>
-              <select id="ciudad" class="form-select" required disabled><option value="">Selecciona...</option></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="direccion">Dirección</label>
-            <input type="text" id="direccion" class="form-input" placeholder="Cra 1 # 2-3, Barrio" autocomplete="street-address" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="combo">¿Cuántos organizadores quieres?</label>
-            <select id="combo" class="form-select">
-              <option value="1">Pack x6 – $79.900</option>
-              <option value="2" selected>Pack x12 – $129.900 (Recomendado)</option>
-              <option value="3">Pack x18 + Envío Gratis – $179.900</option>
-            </select>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-5) 0;border-top:1px solid var(--neutral-200);margin-bottom:var(--space-5);">
-            <span style="font-weight:var(--weight-bold);font-size:var(--text-lg);">Total</span>
-            <strong id="priceDisplay" style="font-size:var(--text-2xl);font-weight:var(--weight-black);color:var(--brand-primary);">$79.900</strong>
-          </div>
-          <input type="hidden" id="totalPrice" name="totalPrice">
-          <button type="submit" class="btn btn-primary btn-lg btn-block">CONFIRMAR MI PEDIDO</button>
-          <p class="text-xs text-muted text-center mt-4"><i class="fa-solid fa-lock"></i> Compra 100% segura. Tus datos están protegidos.</p>
-        </form>
+      <a href="checkout.html" class="btn btn-primary btn-lg" data-reveal style="font-size:1.15rem;padding:1.25rem 3rem;">
+        <i class="fa-solid fa-cart-shopping"></i> Comprar Ahora
+      </a>
+      <div class="hero-trust" data-reveal style="justify-content:center;margin-top:1.5rem;">
+        <span class="hero-trust-item"><i class="fa-solid fa-hand-holding-dollar"></i> Pago contra entrega</span>
+        <span class="hero-trust-item"><i class="fa-solid fa-truck"></i> Envío gratis</span>
+        <span class="hero-trust-item"><i class="fa-solid fa-shield-halved"></i> 30 días garantía</span>
       </div>
     </div>
   </section>
@@ -441,6 +447,19 @@
       </div>
     </div>
   </footer>
+
+  <div id="sticky-cta">
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-info">
+        <div>
+          <div class="sticky-cta-label">Precio especial</div>
+          <div class="sticky-cta-price" id="sticky-price">$79.900</div>
+        </div>
+      </div>
+      <a class="sticky-cta-wa" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="checkout.html" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Comprar Ahora</a>
+    </div>
+  </div>
 
   <script src="config.js"></script>
   <script type="module" src="js/app.js"></script>

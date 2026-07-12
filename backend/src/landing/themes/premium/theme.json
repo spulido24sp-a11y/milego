@@ -1,0 +1,6 @@
+{
+  "id": "premium",
+  "name": "Premium Glass (Super-Conversion)",
+  "conversionScore": 96,
+  "blocks": ["hero", "problem", "enemy", "transformation", "benefits", "testimonials", "offer", "guarantee", "faq", "cta", "checkout"]
+}

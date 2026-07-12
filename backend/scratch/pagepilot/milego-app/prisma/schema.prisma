@@ -1,0 +1,72 @@
+// Modelo de datos de MIleGo — corresponde 1:1 con lo definido en
+// MIleGo_MVP_Ejecutable_V1.md (Parte 1: Modelo de datos)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  candidate
+  active
+  discarded
+}
+
+enum LandingTemplate {
+  editorial // patrón ALIVIA: hero narrativo, problema, beneficios, prueba social, oferta, FAQ
+  pagepilot // patrón NUVA: galería + buy box, selector de cantidad, comparativa, urgencia
+}
+
+enum OrderStatus {
+  pendiente_confirmacion
+  despachado
+  entregado
+  rechazado
+}
+
+model Product {
+  id            String          @id @default(cuid())
+  name          String
+  cost          Float
+  price         Float
+  wow           Boolean         @default(true)
+  commodity     Boolean         @default(false)
+  score         Int             @default(0)
+  recommendation String         @default("monitorear")
+  status        ProductStatus   @default(candidate)
+  template      LandingTemplate @default(editorial)
+  buyerPersona  Json?
+  tiers         Json?
+  createdAt     DateTime        @default(now())
+
+  orders        Order[]
+  decisions     LaunchDecision[]
+}
+
+model LaunchDecision {
+  id             String   @id @default(cuid())
+  productId      String?
+  product        Product? @relation(fields: [productId], references: [id])
+  type           String   // "scoring de producto" | "optimización de campaña" | "fulfillment Dropi"
+  recommendation String
+  recommendedBy  String   @default("liam") // "liam" | "human"
+  humanAction    String   // "aceptado" | "modificado" | "rechazado" | "automático"
+  outcome        String   @default("pendiente")
+  createdAt      DateTime @default(now())
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  productId  String
+  product    Product     @relation(fields: [productId], references: [id])
+  qty        Int
+  price      Float
+  cost       Float
+  status     OrderStatus @default(pendiente_confirmacion)
+  dropiOrderId String?   // referencia externa una vez conectado a la API real de Dropi
+  createdAt  DateTime    @default(now())
+}

@@ -22,3 +22,10 @@ export class AppError extends Error {
     this.details = details;
   }
 }
+
+export function error(res, message, statusCode = 400, details = [], code = 'BAD_REQUEST') {
+  return res.status(statusCode).json({
+    success: false,
+    error: { code, message, details },
+  });
+}

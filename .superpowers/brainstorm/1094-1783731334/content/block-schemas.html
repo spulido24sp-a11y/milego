@@ -1,0 +1,77 @@
+<h2>Schemas de Bloques — Props</h2>
+<p class="subtitle">Cada bloque tiene su propio schema de props</p>
+
+<div class="section">
+  <h3>Hero</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "headline": "string (gigante)",
+  "subheadline": "string (emocional)",
+  "image": "url",
+  "price": number,
+  "originalPrice": number,
+  "discount": number,
+  "ctaText": "string",
+  "ctaLink": "string",
+  "badges": ["string"],
+  "trustItems": ["string"] }
+  </pre>
+</div>
+
+<div class="section">
+  <h3>Problem / Enemy / Transformation</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "type": "problem" | "enemy" | "transformation",
+  "icon": "string",
+  "title": "string",
+  "subtitle": "string",
+  "description": "string",
+  "image": "url",
+  "beforeImage": "url",
+  "afterImage": "url" }
+  </pre>
+</div>
+
+<div class="section">
+  <h3>Benefits</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "title": "string",
+  "items": [{ "icon": "string", "title": "string", "description": "string", "image": "url" }] }
+  </pre>
+</div>
+
+<div class="section">
+  <h3>Testimonials</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "title": "string",
+  "reviews": [{ "name": "string", "city": "string", "text": "string", "stars": 5, "image": "url" }] }
+  </pre>
+</div>
+
+<div class="section">
+  <h3>Offer / Guarantee / CTA</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "title": "string",
+  "description": "string",
+  "ctaText": "string",
+  "ctaLink": "string",
+  "price": number,
+  "originalPrice": number,
+  "combos": [{ "name": "string", "price": number, "original": number }] }
+  </pre>
+</div>
+
+<div class="section">
+  <h3>FAQ</h3>
+  <pre style="background:rgba(255,255,255,0.05);padding:0.75rem;border-radius:0.5rem;font-size:0.75rem;">
+{ "title": "string",
+  "items": [{ "question": "string", "answer": "string" }] }
+  </pre>
+</div>
+
+<div style="margin-top:2rem;padding:1rem;background:rgba(16,185,129,0.08);border-radius:0.75rem;">
+  <p style="font-size:0.85rem;margin:0;">
+    ✅ Todos los bloques se renderizan como HTML estático en el backend.
+    SEO meta tags se generan automáticamente del bloque Hero + Sales Hypothesis.
+    Diseño mobile-first con CSS moderno (grid, flexbox, clamp, custom properties).
+  </p>
+</div>

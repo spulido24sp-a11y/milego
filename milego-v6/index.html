@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrganiMax – Organizadores de Clóset | MIleGo V6</title>
+  <meta name="description" content="Organiza tu clóset y duplica el espacio con OrganiMax de MIleGo. Envíos a toda Colombia, pago contra entrega, compra segura. +2.000 clientes satisfechos.">
+  <meta name="keywords" content="organizadores de closet, organizador de zapatos, ahorra espacio, hogar, Colombia, MIleGo, OrganiMax">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="OrganiMax – Duplica el espacio de tu clóset | MIleGo">
+  <meta property="og:description" content="Organiza tu clóset sin comprar muebles. +2.000 clientes satisfechos. Envíos a toda Colombia.">
+  <meta property="og:image" content="assets/img/hero.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "OrganiMax",
+    "description": "Organizador premium para clóset que duplica el espacio disponible. Ideal para zapatos, accesorios y más.",
+    "brand": { "@type": "Brand", "name": "MIleGo" },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "COP",
+      "lowPrice": "79900",
+      "highPrice": "179900",
+      "offerCount": "3",
+      "availability": "https://schema.org/InStock",
+      "url": "https://milego.co"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "bestRating": "5",
+      "ratingCount": "2150"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- Meta Pixel -->
+  <!--
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'PIXEL_ID');
+  fbq('track', 'PageView');
+  </script>
+  -->
+
+  <!-- GA4 -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+
+  <!-- TikTok Pixel -->
+  <!--
+  <script>
+  !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.load=function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://analytics.tiktok.com/i18n/pixel/static/main.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)};ttq.load();ttq.page();}(window,document,'ttq');
+  ttq.init('TIKTOK_PIXEL_ID');
+  ttq.page();
+  </script>
+  -->
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">MI<span>leGo</span></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="container">
+      <div><i class="fa-solid fa-truck"></i> Envíos a Toda Colombia</div>
+      <div><i class="fa-solid fa-hand-holding-dollar"></i> Pago Contra Entrega</div>
+      <div><i class="fa-solid fa-shield"></i> Compra Segura</div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container">
+      <a href="#" class="logo">MI<span>leGo</span></a>
+      <nav>
+        <a href="#benefits">Beneficios</a>
+        <a href="#pricing">Ofertas</a>
+        <a href="#testimonials">Opiniones</a>
+        <a href="#checkout">Comprar</a>
+      </nav>
+      <a href="#checkout" class="btn-primary header-button">Comprar Ahora</a>
+      <button class="mobile-menu" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span>⭐⭐⭐⭐⭐</span> Más de 2.000 clientes satisfechos
+          </div>
+          <h1>Organiza tu clóset. Duplica el espacio. Sin comprar muebles.</h1>
+          <p>OrganiMax es el organizador premium que transforma tu clóset en un espacio ordenado y funcional. Diseñado para Colombia, con materiales de la más alta calidad.</p>
+          <div class="hero-actions">
+            <a href="#checkout" class="btn-primary"><i class="fa-solid fa-cart-shopping"></i> Comprar Ahora</a>
+            <a href="#video" class="btn-secondary"><i class="fa-solid fa-play"></i> Ver Demostración</a>
+          </div>
+          <div class="hero-benefits">
+            <div><i class="fa-solid fa-check-circle"></i> Duplica el espacio</div>
+            <div><i class="fa-solid fa-check-circle"></i> Material Premium</div>
+            <div><i class="fa-solid fa-check-circle"></i> Envío Hoy</div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-glow"></div>
+          <img src="assets/img/hero.webp" alt="OrganiMax – Organizador de clóset premium" width="500" height="500">
+          <div class="floating-card top">🔥 Más Vendido</div>
+          <div class="floating-card bottom">🚚 Envío Hoy</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="numbers">
+    <div class="container">
+      <div class="number">
+        <h2><span class="counter" data-target="2150">0</span>+</h2>
+        <p>Clientes Satisfechos</p>
+      </div>
+      <div class="number">
+        <h2><span class="counter" data-target="4.9">0</span>★</h2>
+        <p>Calificación Promedio</p>
+      </div>
+      <div class="number">
+        <h2><span class="counter" data-target="100">0</span>%</h2>
+        <p>Satisfacción Garantizada</p>
+      </div>
+      <div class="number">
+        <h2><span class="counter" data-target="24">0</span>/7</h2>
+        <p>Soporte al Cliente</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="benefits">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Beneficios</span>
+        <h2>¿Por qué elegir OrganiMax?</h2>
+        <p>Diseñado para transformar tu hogar con calidad y estilo.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-expand"></i>
+          <h3>Duplica el Espacio</h3>
+          <p>Aprovecha cada rincón de tu clóset y organiza todo sin necesidad de nuevos muebles.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-gem"></i>
+          <h3>Material Premium</h3>
+          <p>Fabricado con materiales de alta resistencia y durabilidad para uso diario intensivo.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-shoe-prints"></i>
+          <h3>Todo tipo de zapatos</h3>
+          <p>Perfecto para zapatos, tenis, tacones, botas y accesorios. Organiza todo en un solo lugar.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <i class="fa-solid fa-house"></i>
+          <h3>Ideal para cualquier hogar</h3>
+          <p>Se adapta a cualquier tipo de clóset, armario o espacio de almacenamiento en tu hogar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="before-after">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Antes y Después</span>
+        <h2>La transformación que tu clóset necesita</h2>
+        <p>Mira la diferencia que OrganiMax hace en segundos.</p>
+      </div>
+      <div class="compare-wrapper">
+        <div class="compare-card reveal">
+          <img src="assets/img/before.webp" alt="Antes – Clóset desorganizado" width="400" height="400">
+          <div class="overlay">
+            <h3>Antes</h3>
+            <ul>
+              <li>✗ Desorden total</li>
+              <li>✗ Espacio desperdiciado</li>
+              <li>✗ Difícil de encontrar</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-arrow reveal"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="compare-card reveal">
+          <img src="assets/img/after.webp" alt="Después – Clóset organizado con OrganiMax" width="400" height="400">
+          <div class="overlay">
+            <h3>Después</h3>
+            <ul>
+              <li>✓ Todo en su lugar</li>
+              <li>✓ Espacio duplicado</li>
+              <li>✓ Fácil acceso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="video-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Video</span>
+        <h2>Mira cómo funciona OrganiMax</h2>
+        <p>Descubre en menos de un minuto cómo transformar tu clóset.</p>
+      </div>
+      <div class="video-box reveal">
+        <img src="assets/img/video-cover.webp" alt="Video demostración OrganiMax" width="800" height="450">
+        <div class="play-button"><i class="fa-solid fa-play"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICONS ROW -->
+  <section class="icons-row">
+    <div class="container">
+      <div class="icon-item">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h4>Envíos Rápidos</h4>
+        <p>Entregas en 2-5 días hábiles</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-lock"></i>
+        <h4>Compra Segura</h4>
+        <p>Datos protegidos y cifrados</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        <h4>Pago al Recibir</h4>
+        <p>Solo pagas cuando recibes</p>
+      </div>
+      <div class="icon-item">
+        <i class="fa-solid fa-headset"></i>
+        <h4>Soporte</h4>
+        <p>Atención al cliente 24/7</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Ofertas</span>
+        <h2>Elige tu pack ideal</h2>
+        <p>Selecciona el número de organizadores que necesitas y ahorra.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="card-pack reveal">
+          <div class="top">Pack x6</div>
+          <div class="price">$79.900</div>
+          <div class="old">$119.900</div>
+          <div class="save">Ahorras $40.000</div>
+          <ul>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> 6 Organizadores</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Organiza 6 pares</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Ideal para empezar</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Envío gratis</li>
+          </ul>
+          <button class="buy-pack" data-combo="6">Comprar Ahora</button>
+        </div>
+        <div class="card-pack featured reveal">
+          <div class="featured-label">MÁS VENDIDO</div>
+          <div class="top">Pack x12</div>
+          <div class="price">$129.900</div>
+          <div class="old">$199.900</div>
+          <div class="save">Ahorras $70.000</div>
+          <ul>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> 12 Organizadores</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Organiza 12 pares</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Recomendado</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Envío gratis + Regalo</li>
+          </ul>
+          <button class="buy-pack" data-combo="12">Comprar Ahora</button>
+        </div>
+        <div class="card-pack reveal">
+          <div class="top">Pack x18</div>
+          <div class="price">$179.900</div>
+          <div class="old">$279.900</div>
+          <div class="save">Ahorras $100.000</div>
+          <ul>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> 18 Organizadores</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Organiza 18 pares</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Para toda la familia</li>
+            <li><i class="fa-solid fa-check" style="color:var(--accent)"></i> Envío gratis + 2 Regalos</li>
+          </ul>
+          <button class="buy-pack" data-combo="18">Comprar Ahora</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Opiniones</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+        <p>Más de 2.000 colombianos ya transformaron su clóset.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="assets/img/client1.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>María García</h4>
+              <span>Bogotá, Cundinamarca</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Increíble producto. Mi clóset pasó del caos total a estar perfectamente organizado en cuestión de minutos. Lo recomiendo al 100%.</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="assets/img/client2.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>Carlos Martínez</h4>
+              <span>Medellín, Antioquia</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Compra súper inteligente. La calidad es superior a lo que esperaba y el espacio que ahorré es impresionante. Vale cada peso.</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-header">
+            <img src="assets/img/client3.webp" alt="Cliente" width="50" height="50">
+            <div>
+              <h4>Ana Rodríguez</h4>
+              <span>Cali, Valle del Cauca</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>Pedí el pack x12 para toda la familia y fue la mejor decisión. Ahora todos tenemos nuestro espacio ordenado. Llegó súper rápido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS -->
+  <section class="statistics">
+    <div class="container">
+      <div class="stat-card reveal">
+        <h2><span class="counter" data-target="2150">0</span>+</h2>
+        <p>Clientes felices</p>
+      </div>
+      <div class="stat-card reveal">
+        <h2><span class="counter" data-target="98">0</span>%</h2>
+        <p>Satisfacción</p>
+      </div>
+      <div class="stat-card reveal">
+        <h2><span class="counter" data-target="32">0</span>+</h2>
+        <p>Ciudades cubiertas</p>
+      </div>
+      <div class="stat-card reveal">
+        <h2><span class="counter" data-target="15000">0</span>+</h2>
+        <p>Organizadores vendidos</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee">
+    <div class="container">
+      <div class="guarantee-box reveal">
+        <div class="guarantee-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h2>30 Días de Garantía</h2>
+          <p>Si no estás 100% satisfecho con tu OrganiMax, te devolvemos tu dinero. Sin preguntas, sin complicaciones. Tu satisfacción es nuestra prioridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MIleGo -->
+  <section class="why-milego">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>¿Por qué MIleGo?</span>
+        <h2>Más que un producto, una solución</h2>
+        <p>Somos una tienda colombiana comprometida con la calidad y tu satisfacción.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <i class="fa-solid fa-medal"></i>
+          <h3>Calidad Garantizada</h3>
+          <p>Materiales premium con resistencia probada para uso diario intensivo.</p>
+        </div>
+        <div class="why-card reveal">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <h3>Cobertura Nacional</h3>
+          <p>Envíos a todo Colombia con aliados logísticos de confianza.</p>
+        </div>
+        <div class="why-card reveal">
+          <i class="fa-solid fa-face-smile"></i>
+          <h3>Atención Personalizada</h3>
+          <p>Te acompañamos antes, durante y después de tu compra.</p>
+        </div>
+        <div class="why-card reveal">
+          <i class="fa-solid fa-rotate-left"></i>
+          <h3>Devolución Fácil</h3>
+          <p>Si no te encanta, te devolvemos tu dinero sin rodeos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner reveal">
+    <div class="container">
+      <div class="cta-content">
+        <h2>¡Transforma tu clóset hoy!</h2>
+        <p>Más de 2.000 colombianos ya organizaron su hogar con OrganiMax. No esperes más.</p>
+        <a href="#checkout" class="btn-primary"><i class="fa-solid fa-cart-shopping"></i> Comprar Ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section id="checkout" class="checkout-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Pedido</span>
+        <h2>Completa tu pedido</h2>
+        <p>Recibe OrganiMax en la puerta de tu casa. Paga contra entrega.</p>
+      </div>
+      <div class="checkout-grid">
+        <div class="checkout-summary reveal">
+          <img src="assets/img/hero.webp" alt="OrganiMax" width="400" height="400">
+          <h3>OrganiMax</h3>
+          <p class="summary-description">Organizador premium para clóset. Duplica el espacio sin comprar muebles.</p>
+          <div class="summary-features">
+            <div><i class="fa-solid fa-check-circle"></i> Material premium resistente</div>
+            <div><i class="fa-solid fa-check-circle"></i> Diseñado para todo tipo de zapatos</div>
+            <div><i class="fa-solid fa-check-circle"></i> Fácil instalación en segundos</div>
+            <div><i class="fa-solid fa-check-circle"></i> Envío gratis a toda Colombia</div>
+          </div>
+        </div>
+        <div class="checkout-form reveal">
+          <form id="orderForm">
+            <div class="input">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Ej: María García" required>
+            </div>
+            <div class="input">
+              <label for="telefono">Celular</label>
+              <input type="tel" id="telefono" placeholder="Ej: 300 123 4567" required>
+            </div>
+            <div class="input">
+              <label for="departamento">Departamento</label>
+              <select id="departamento" required><option value="">Selecciona tu departamento...</option></select>
+            </div>
+            <div class="input">
+              <label for="ciudad">Ciudad</label>
+              <select id="ciudad" required disabled><option value="">Selecciona tu ciudad...</option></select>
+            </div>
+            <div class="input">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" placeholder="Cra 1 # 2-3, Barrio" required>
+            </div>
+            <div class="input">
+              <label for="combo">¿Cuántos organizadores quieres?</label>
+              <select id="combo">
+                <option value="6">Pack x6 – $79.900</option>
+                <option value="12" selected>Pack x12 – $129.900 (Recomendado)</option>
+                <option value="18">Pack x18 – $179.900</option>
+              </select>
+            </div>
+            <div class="input">
+              <label for="observaciones">Observaciones (opcional)</label>
+              <textarea id="observaciones" placeholder="Ej: Prefiero pago en efectivo"></textarea>
+            </div>
+            <div class="price-box">
+              <span>Total</span>
+              <strong id="totalPrice">$129.900</strong>
+            </div>
+            <button type="submit" class="btn-order">CONFIRMAR MI PEDIDO</button>
+            <div class="secure"><i class="fa-solid fa-lock"></i> Compra 100% segura. Tus datos están protegidos.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>FAQ</span>
+        <h2>Preguntas Frecuentes</h2>
+        <p>Resolvemos tus dudas antes de comprar.</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item reveal">
+          <button>¿Cómo se instala OrganiMax? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Es muy sencillo. Solo debes colocar el organizador en tu clóset, ajustarlo al tamaño deseado y acomodar tus zapatos. No necesitas herramientas ni accesorios adicionales. En menos de 1 minuto tu clóset estará transformado.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Cuánto tiempo tarda el envío? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Realizamos envíos a todo Colombia. Los tiempos de entrega son de 2 a 5 días hábiles, dependiendo de la ciudad. Una vez confirmado tu pedido, te enviamos el número de seguimiento para que sepas dónde está tu paquete en todo momento.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Puedo pagar contra entrega? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Sí, ofrecemos pago contra entrega en todas las ciudades del país. Puedes pagar en efectivo o con Nequi cuando recibas tu pedido. También aceptamos transferencias bancarias y tarjetas.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button>¿Qué pasa si no me gusta? <i class="fa-solid fa-chevron-down"></i></button>
+          <div><p>Ofrecemos 30 días de garantía de satisfacción. Si por cualquier razón no estás conforme con tu OrganiMax, te devolvemos tu dinero sin preguntas. Solo contáctanos y gestionamos la devolución.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2>MI<span>leGo</span></h2>
+          <p>Tienda colombiana premium de productos para el hogar. Transformamos tu espacio con calidad y diseño. +2.000 clientes satisfechos en todo el país.</p>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cambios y Devoluciones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Atención</h4>
+          <ul>
+            <li><a href="tel:+573000000000"><i class="fa-solid fa-phone"></i> +57 300 000 0000</a></li>
+            <li><a href="mailto:hola@milego.co"><i class="fa-solid fa-envelope"></i> hola@milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i> @milego.co</a></li>
+            <li><a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2026 MIleGo. Todos los derechos reservados. Hecho con ❤️ en Colombia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="#" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTop" aria-label="Volver arriba">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>

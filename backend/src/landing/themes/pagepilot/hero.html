@@ -1,0 +1,64 @@
+<div class="theme-pagepilot-hero">
+  <!-- Barra superior de ventajas compacta -->
+  <div class="pagepilot-top-promo">
+    <span>◆ envío gratis hoy</span>
+    <span>◆ pago contra entrega</span>
+    <span>◆ garantía 30 días</span>
+  </div>
+
+  <div class="pagepilot-hero-grid">
+    <!-- Galería integrada en desktop a la izquierda -->
+    <div class="pagepilot-gallery-side">
+      <div class="pagepilot-badge-hot">🔥 más vendido</div>
+      <div class="pagepilot-image-box">
+        <img src="{{PRODUCT_IMAGE}}" alt="{{PRODUCT_NAME}}" class="pagepilot-hero-img" />
+      </div>
+    </div>
+
+    <!-- Buy Box principal a la derecha -->
+    <div class="pagepilot-buybox-side">
+      <div class="pagepilot-stars-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.8 · reseñas verificadas</span>
+      </div>
+      
+      <h1 class="pagepilot-title">{{PRODUCT_NAME}}</h1>
+      
+      <p class="pagepilot-pitch">
+        {{PRODUCT_SUBTITLE}}
+      </p>
+
+      <div class="pagepilot-price-line">
+        <span class="price-now">{{OFFER_PRICE}} COP</span>
+        <span class="price-compare">{{OLD_PRICE}} COP</span>
+      </div>
+      
+      <div class="pagepilot-stock-alert">⚡ {{STOCK_URGENCY}}</div>
+
+      <!-- Tiers de oferta compactos con radio buttons -->
+      <div class="pagepilot-tiers-list">
+        {{#each BUNDLE_TIERS}}
+        <div class="pagepilot-tier-item {{activeClass}}" onclick="selectPagePilotTier(this, {{tierPriceValue}})">
+          <div class="tier-left">
+            <span class="radio-dot {{activeClass}}"></span>
+            <div>
+              <span class="tier-label">{{tierLabel}}</span>
+              <span class="tier-sub">{{tierSub}}</span>
+            </div>
+          </div>
+          <span class="tier-price">{{tierPriceFormatted}}</span>
+        </div>
+        {{/each}}
+      </div>
+
+      <a href="#checkout-section" class="pagepilot-cta-btn">{{CTA_TEXT}} →</a>
+
+      <div class="pagepilot-trust-row">
+        <span>🔒 pago seguro</span>
+        <span>🚚 envío 2-5 días</span>
+        <span>↩ devolución 30 días</span>
+      </div>
+    </div>
+  </div>
+</div>
+

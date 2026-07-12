@@ -1,0 +1,70 @@
+<h2>Arquitectura: ¿Cómo construimos el Conversion Engine?</h2>
+<p class="subtitle">Tu spec es clara. Ahora hay que decidir CÓMO se implementa.</p>
+
+<div class="section">
+  <h3>La pregunta clave</h3>
+  <p>Toda landing debe construirse con bloques (Hero, Problem, Benefits, Testimonials, Offer, FAQ, CTA...).</p>
+  <p>¿Dónde se arma la landing?</p>
+</div>
+
+<div class="options" style="margin-top:1.5rem;">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Backend Engine (Node.js)</h3>
+      <p>LIAM define la estructura → backend la renderiza como HTML en el servidor → se sirve como página estática. Cada bloque tiene schema + render en el backend. Performance máxima, SEO nativo. Los bloques se guardan en PostgreSQL como JSON.</p>
+      <div class="placeholder" style="margin-top:0.75rem;font-size:0.8rem;">
+        Backend define bloques → Renderiza HTML → Sirve página completa
+      </div>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Frontend SPA + Editor Visual</h3>
+      <p>Los bloques se renderizan en el navegador con vanilla JS. El admin tiene un editor visual drag-and-drop. La landing es una SPA que carga la configuración desde la API. Ideal para edición en vivo, pero más pesado y complejo.</p>
+      <div class="placeholder" style="margin-top:0.75rem;font-size:0.8rem;">
+        Admin define bloques → API los sirve → Navegador los renderiza
+      </div>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Híbrido: Backend Render + Admin Editor</h3>
+      <p>Recomendado. Backend renderiza HTML inicial (SSR-like con template strings) para performance y SEO. Admin tiene editor de bloques (genera JSON). LIAM puede modificar bloques vía API. Lo mejor de ambos mundos.</p>
+      <div class="placeholder" style="margin-top:0.75rem;font-size:0.8rem;">
+        Admin define bloques → Backend renderiza HTML → Sirve página + API para live edit
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:2rem;">
+  <h3>MVP Scope</h3>
+  <p>El spec completo es enorme (11 secciones, AI, editor visual, LIAM hipótesis, etc.).</p>
+  <p>¿Cuál debe ser el MVP?</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="m1" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>MVP Conversional</h3>
+      <p>Sistema de bloques funcional. LIAM genera JSON con bloques → engine renderiza landing completa. Sin editor visual. Sin drag-and-drop. LIAM decide todo. Puedes modificar el JSON en admin.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="m2" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>MVP Completo</h3>
+      <p>Sistema de bloques + editor visual en admin + LIAM generación automática. Más ambicioso, más tiempo de desarrollo.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:2rem;padding:1rem;background:rgba(99,102,241,0.08);border-radius:0.75rem;">
+  <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);">
+    <strong>Mi recomendación:</strong> Opción C (Híbrido) + MVP Conversional (Opción 1). El backend ya existe y renderiza HTML estático. Los bloques se guardan como JSON en PostgreSQL. LIAM es quien genera/configura los bloques. El editor visual puede venir después.
+  </p>
+</div>

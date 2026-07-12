@@ -11,6 +11,14 @@ class EventBus {
   }
 
   async emit(event, data, meta = {}) {
+    // Enrich meta object automatically to prevent handler failures
+    const parts = event.split('.');
+    meta.eventName = event;
+    meta.entityType = meta.entityType || parts[0] || 'unknown';
+    meta.action = meta.action || parts[1] || 'unknown';
+    meta.entityId = meta.entityId || data.productId || data.id || data.orderId || data.order?.id || data.customer?.id || null;
+    meta.storeId = meta.storeId || data.store_id || 1;
+
     const [log] = await db('event_logs').insert({
       event_name: event,
       payload: JSON.stringify({ data, meta }),
@@ -21,22 +29,19 @@ class EventBus {
     }).returning('*');
 
     const handlers = this.handlers[event] || [];
+    let allSucceeded = true;
     for (const handler of handlers) {
       try {
         await handler(data, meta);
       } catch (err) {
         console.error(`[EventBus] Handler failed for ${event}:`, err.message);
-        await db('event_logs').where({ id: log.id }).update({
-          status: 'failed',
-          error_message: err.message,
-          processed_at: db.fn.now(),
-        });
-        return;
+        allSucceeded = false;
       }
     }
 
     await db('event_logs').where({ id: log.id }).update({
-      status: 'completed',
+      status: allSucceeded ? 'completed' : 'completed_with_errors',
+      error_message: allSucceeded ? null : 'One or more handlers failed',
       processed_at: db.fn.now(),
     });
   }

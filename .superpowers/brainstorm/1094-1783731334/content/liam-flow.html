@@ -1,0 +1,88 @@
+<h2>Flujo LIAM + Admin + Backend</h2>
+<p class="subtitle">De la hipótesis de venta a la página servida</p>
+
+<div class="placeholder" style="padding:2rem;text-align:center;">
+<pre style="font-size:0.75rem;line-height:1.8;text-align:left;">
+┌─────────────────────────────────────────────────┐
+│              1. LIAM (Hipótesis de Venta)        │
+│  "Cliente: Mujeres 28-45. Dolor: lumbar por     │
+│   estar sentadas. Objeción: 'no creo funcione'. │
+│   Disparador: comodidad. Oferta: 2x1 envío."    │
+└──────────────────────┬──────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────┐
+│              2. Block Generator                  │
+│  LIAM decide: qué bloques, en qué orden,        │
+│  qué copy, qué CTA, qué colores, qué oferta.    │
+│  Salida: JSON de bloques completo.              │
+└──────────────────────┬──────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────┐
+│              3. Admin Preview                    │
+│  Admin ve landing renderizada en /admin/preview │
+│  Puede editar props de cada bloque              │
+│  (formularios, no drag & drop)                  │
+└──────────────────────┬──────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────┐
+│              4. Publish                         │
+│  Backend guarda en DB (tabla landings)          │
+│  Genera HTML estático + SEO                     │
+│  Sirve en /p/{product_slug}                     │
+└─────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<div class="section" style="margin-top:1.5rem;">
+  <h3>¿Qué hace LIAM exactamente?</h3>
+  <div style="display:grid;gap:0.5rem;">
+    <div style="padding:0.75rem;background:rgba(99,102,241,0.08);border-radius:0.5rem;">
+      <strong>1. Hipótesis de venta</strong>
+      <p style="font-size:0.85rem;margin:0.25rem 0 0;color:rgba(255,255,255,0.6);">Define cliente, dolor, objeción, disparador, prueba social, oferta, CTA.</p>
+    </div>
+    <div style="padding:0.75rem;background:rgba(99,102,241,0.08);border-radius:0.5rem;">
+      <strong>2. Selección de bloques</strong>
+      <p style="font-size:0.85rem;margin:0.25rem 0 0;color:rgba(255,255,255,0.6);">Elige qué bloques usar y en qué orden. No todas las landings usan todos los bloques.</p>
+    </div>
+    <div style="padding:0.75rem;background:rgba(99,102,241,0.08);border-radius:0.5rem;">
+      <strong>3. Copywriting</strong>
+      <p style="font-size:0.85rem;margin:0.25rem 0 0;color:rgba(255,255,255,0.6);">Escribe headlines, subheadlines, descripciones con principios de neuromarketing.</p>
+    </div>
+    <div style="padding:0.75rem;background:rgba(99,102,241,0.08);border-radius:0.5rem;">
+      <strong>4. Configuración visual</strong>
+      <p style="font-size:0.85rem;margin:0.25rem 0 0;color:rgba(255,255,255,0.6);">Define colores, imánes, CTA basado en el producto y la audiencia.</p>
+    </div>
+    <div style="padding:0.75rem;background:rgba(99,102,241,0.08);border-radius:0.5rem;">
+      <strong>5. SEO automático</strong>
+      <p style="font-size:0.85rem;margin:0.25rem 0 0;color:rgba(255,255,255,0.6);">Genera title, description, OG, JSON-LD, canonical.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:1.5rem;">
+  <h3>Admin: Block Editor (MVP)</h3>
+  <p>No drag & drop. Formularios estructurados por bloque.</p>
+  <div class="placeholder" style="padding:1rem;">
+    <pre style="font-size:0.8rem;">
+┌─────────────────────────────────────┐
+│  Landing: OrganiMax                 │
+├─────────────────────────────────────┤
+│  Bloques:                           │
+│  [Hero] [Problem] [Benefits] [+]   │
+├─────────────────────────────────────┤
+│  Editor: Hero Block                 │
+│  ┌─────────────────────────────────┐│
+│  │ Headline: [________________]    ││
+│  │ Subheadline: [_______________]  ││
+│  │ Image: [url] [Browse]          ││
+│  │ Price: [79900]                 ││
+│  │ CTA Text: [Comprar Ahora]      ││
+│  └─────────────────────────────────┘│
+│  [Preview] [Save Draft] [Publish]  │
+└─────────────────────────────────────┘
+    </pre>
+  </div>
+</div>

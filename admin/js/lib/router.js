@@ -13,8 +13,9 @@ export class Router {
   }
 
   resolve() {
-    const hash = window.location.hash.slice(1) || '/dashboard';
-    const handler = this.routes[hash];
+    const fullHash = window.location.hash.slice(1) || '/dashboard';
+    const path = fullHash.split('?')[0];
+    const handler = this.routes[path];
     if (handler) handler();
   }
 

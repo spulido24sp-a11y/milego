@@ -2,11 +2,19 @@ import app from './app.js';
 import { config } from './config/index.js';
 import db from './config/database.js';
 import { logger } from './middlewares/requestLogger.js';
+import { startWorker } from './jobs/worker.js';
+import { startAdSyncWorker } from './workers/ad-sync.worker.js';
 
 async function start() {
   try {
     await db.raw('SELECT 1');
     logger.info('Database connected');
+    
+    // Start background job queue worker for Core 2.0
+    startWorker(5000);
+
+    // Start background sync for Meta and TikTok Ads snapshots
+    startAdSyncWorker();
   } catch (err) {
     logger.error({ err }, 'Database connection failed');
     process.exit(1);

@@ -1,0 +1,30 @@
+{
+  "id": 14166,
+  "nombre": "Corrector de Postura Inteligente",
+  "descripcion": "Corrector con sensor de vibración para espalda y hombros.",
+  "costo": 25000.00,
+  "precio_sugerido": 79900.00,
+  "stock": 150,
+  "peso": 0.35,
+  "imagenes": [
+    "https://dropi.s3.amazonaws.com/14166/1.jpg",
+    "https://dropi.s3.amazonaws.com/14166/2.jpg",
+    "https://dropi.s3.amazonaws.com/14166/3.jpg"
+  ],
+  "variantes": [
+    {
+      "id": 8872,
+      "nombre": "Talla M",
+      "sku": "CORRECT-M",
+      "precio": 79900.00,
+      "stock": 90
+    },
+    {
+      "id": 8873,
+      "nombre": "Talla L",
+      "sku": "CORRECT-L",
+      "precio": 79900.00,
+      "stock": 60
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { ConfigController } from '../controllers/config.controller.js';
+import { SettingsController } from '../controllers/settings.controller.js';
 import { tenantContext } from '../middlewares/tenant.js';
 
 const router = Router();
-const controller = new ConfigController();
+const controller = new SettingsController();
 
 router.get('/config', tenantContext, controller.getPublicConfig.bind(controller));
 

@@ -1,0 +1,21 @@
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Preguntas Frecuentes</h2>
+      <p>Todo lo que necesitas saber antes de comprar</p>
+    </div>
+    <div class="faq-container">
+      {{#each FAQ_ITEMS}}
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('faq-open')">
+          <span>{{faqQuestion}}</span>
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <p>{{faqAnswer}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

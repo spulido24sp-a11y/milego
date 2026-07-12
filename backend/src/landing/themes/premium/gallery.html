@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Galería del Producto</h2>
+      <p>Mira {{PRODUCT_NAME}} en detalle</p>
+    </div>
+    <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:var(--space-4);">
+      {{#each GALLERY_IMAGES}}
+      <div class="card" style="overflow:hidden; padding:0;">
+        <img src="{{imageUrl}}" alt="{{imageAlt}}" style="width:100%; height:280px; object-fit:cover; display:block;">
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

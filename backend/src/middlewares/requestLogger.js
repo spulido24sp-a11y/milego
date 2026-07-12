@@ -2,8 +2,7 @@ import pino from 'pino';
 import { config } from '../config/index.js';
 
 const logger = pino({
-  level: config.log.level,
-  transport: config.env === 'development' ? { target: 'pino-pretty' } : undefined,
+  level: config.log.level
 });
 
 export function requestLogger(req, res, next) {

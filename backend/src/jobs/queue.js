@@ -15,10 +15,16 @@ export async function enqueue(type, payload, availableAt = new Date(), correlati
   return job;
 }
 
-export async function dequeue() {
-  const [job] = await db('jobs')
+export async function dequeue(jobId = null) {
+  let query = db('jobs')
     .where('status', 'pending')
-    .where('available_at', '<=', db.fn.now())
+    .where('available_at', '<=', db.fn.now());
+
+  if (jobId) {
+    query = query.where({ id: jobId });
+  }
+
+  const [job] = await query
     .orderBy('created_at', 'asc')
     .limit(1)
     .forUpdate()

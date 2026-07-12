@@ -14,6 +14,7 @@ export const createProductSchema = z.object({
   is_featured: z.boolean().default(false),
   meta_title: z.string().max(200).optional(),
   meta_description: z.string().max(500).optional(),
+  launch_blueprint: z.any().optional(),
 });
 
 export const updateProductSchema = createProductSchema.partial();

@@ -1,4 +1,5 @@
 import { ProductRepository } from '../repositories/product.repository.js';
+import { bus } from '../events/index.js';
 
 const repo = new ProductRepository();
 
@@ -16,7 +17,15 @@ export class ProductService {
   }
 
   async create(data) {
-    return repo.create(data);
+    const product = await repo.create(data);
+    // Emit product.created to trigger asynchronous launch blueprinting in the background worker
+    await bus.emit('product.created', { productId: product.id }, {
+      entityType: 'product',
+      entityId: product.id,
+      action: 'created',
+      storeId: product.store_id || 1
+    });
+    return product;
   }
 
   async update(id, data) {

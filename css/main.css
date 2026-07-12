@@ -15,6 +15,8 @@
 @import 'components/loader.css';
 @import 'components/reviews-carousel.css';
 @import 'components/video-popup.css';
+@import 'components/countdown.css';
+@import 'components/sticky-cta.css';
 
 @import 'layout/grid.css';
 

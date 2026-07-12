@@ -1,0 +1,18 @@
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Elige tu oferta especial</h2>
+      <p>Precios exclusivos con envío gratis a toda Colombia</p>
+    </div>
+    <div class="pricing-grid">
+      {{#each BUNDLE_TIERS}}
+      <div class="pricing-card {{activeClass}}">
+        <div class="pricing-label">{{tierSub}}</div>
+        <div class="pricing-price">{{tierPriceFormatted}}</div>
+        <div style="font-size:var(--text-sm); color:var(--text-secondary); margin-bottom:var(--space-4);">{{tierLabel}}</div>
+        <a href="#checkout" class="btn btn-primary btn-block">Lo quiero</a>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

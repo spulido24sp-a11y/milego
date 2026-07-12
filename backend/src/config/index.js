@@ -28,4 +28,14 @@ export const config = {
   log: {
     level: process.env.LOG_LEVEL || 'info',
   },
+  dropiProviderEnabled: process.env.DROPI_PROVIDER_ENABLED === 'true',
+  dropiIntegrationKey: process.env.DROPI_INTEGRATION_KEY || null,
+  wompi: {
+    publicKey: process.env.WOMPI_PUBLIC_KEY || 'pub_stagtest_5e4c1d6d6f7d4c1d6d6f7d4c',
+    privateKey: process.env.WOMPI_PRIVATE_KEY || 'prv_stagtest_5e4c1d6d6f7d4c1d6d6f7d4c',
+    env: process.env.WOMPI_ENV || 'sandbox',
+  },
+  liam: {
+    recommendationMode: process.env.LIAM_RECOMMENDATION_MODE || 'off',
+  },
 };
