@@ -143,11 +143,15 @@ export async function up(knex) {
   });
 
   // ─── 5. Registrar versión del esquema en settings ──────────────────
-  await knex('settings').insert({
-    key: 'liam.telemetry_schema_version',
-    value: '1',
-    store_id: 1,
-  }).onConflict(['key', 'store_id']).ignore();
+  // Solo si existe la tienda 1 (en DBs nuevas puede no existir aún).
+  const storeOne = await knex('stores').where('id', 1).first();
+  if (storeOne) {
+    await knex('settings').insert({
+      key: 'liam.telemetry_schema_version',
+      value: '1',
+      store_id: 1,
+    }).onConflict(['key', 'store_id']).ignore();
+  }
 }
 
 export async function down(knex) {

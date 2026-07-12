@@ -13,4 +13,4 @@ COPY knexfile.cjs ./backend/knexfile.cjs
 
 EXPOSE 3000
 
-CMD cd backend && npx knex migrate:latest && node src/server.js
+CMD cd backend && npx knex migrate:latest; node src/server.js
