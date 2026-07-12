@@ -9,7 +9,8 @@ COPY backend/ ./backend/
 COPY data/ ./data/
 COPY gracias.html ./
 COPY uploads/ ./uploads/
+COPY knexfile.cjs ./backend/knexfile.cjs
 
 EXPOSE 3000
 
-CMD ["node", "backend/src/server.js"]
+CMD cd backend && npx knex migrate:latest && node src/server.js
