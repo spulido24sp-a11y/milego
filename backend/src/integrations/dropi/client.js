@@ -6,7 +6,7 @@ import { randomUUID } from 'crypto';
 export class DropiClient {
   constructor() {
     this.baseUrl = config.env === 'production' 
-      ? 'https://app.dropi.co/api/v1' 
+      ? 'https://api.dropi.co/api/v1' 
       : 'https://test.api.dropi.co/api/v1';
   }
 
@@ -45,6 +45,7 @@ export class DropiClient {
           method: 'GET',
           headers: {
             'dropi-integration-key': integrationKey,
+            'Authorization': `Bearer ${integrationKey}`,
             'Content-Type': 'application/json'
           },
           signal: controller.signal
@@ -112,6 +113,7 @@ export class DropiClient {
         method: 'GET',
         headers: {
           'dropi-integration-key': integrationKey,
+          'Authorization': `Bearer ${integrationKey}`,
           'Content-Type': 'application/json'
         }
       });
@@ -131,6 +133,7 @@ export class DropiClient {
         if (Array.isArray(json.data)) return json.data;
         if (Array.isArray(json.items)) return json.items;
         if (Array.isArray(json.products)) return json.products;
+        if (Array.isArray(json.objects)) return json.objects;
         return [];
       }
       if (res.status === 401 || res.status === 403) {
@@ -169,6 +172,7 @@ export class DropiClient {
         method: 'POST',
         headers: {
           'dropi-integration-key': integrationKey,
+          'Authorization': `Bearer ${integrationKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
@@ -220,6 +224,7 @@ export class DropiClient {
     const res = await fetch(url, {
       headers: {
         'dropi-integration-key': integrationKey,
+        'Authorization': `Bearer ${integrationKey}`,
         'Content-Type': 'application/json',
       },
     });
