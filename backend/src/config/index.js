@@ -39,3 +39,36 @@ export const config = {
     recommendationMode: process.env.LIAM_RECOMMENDATION_MODE || 'off',
   },
 };
+
+/**
+ * Validación segura de variables de entorno críticas.
+ * NO crashea el proceso: solo registra WARN para que el operador
+ * sepa qué falta. Devuelve la lista de advertencias.
+ * @returns {string[]} Advertencias de configuración
+ */
+config.validate = function validateEnv() {
+  const warnings = [];
+
+  if (process.env.DROPI_PROVIDER_ENABLED !== 'true' && !config.dropiProviderEnabled) {
+    warnings.push('DROPI_PROVIDER_ENABLED no está en "true" → la sincronización Dropi está inactiva');
+  }
+  if (!process.env.DROPI_INTEGRATION_KEY && !config.dropiIntegrationKey) {
+    warnings.push('DROPI_INTEGRATION_KEY falta → no se puede conectar a Dropi (importación/automatización)');
+  }
+  if (process.env.LIAM_RECOMMENDATION_MODE !== 'on') {
+    warnings.push('LIAM_RECOMMENDATION_MODE != "on" → las decisiones comerciales de LIAM están limitadas');
+  }
+  if (!process.env.GEMINI_API_KEY) {
+    warnings.push('GEMINI_API_KEY falta → LIAM usa modo mock (sin copy generado por LLM)');
+  }
+  if (!process.env.DATABASE_URL) {
+    warnings.push('DATABASE_URL falta → el sistema no puede operar');
+  }
+
+  if (warnings.length) {
+    console.warn('[CONFIG] Variables de entorno faltantes:\n - ' + warnings.join('\n - '));
+  } else {
+    console.info('[CONFIG] Todas las variables críticas están presentes.');
+  }
+  return warnings;
+};

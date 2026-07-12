@@ -89,6 +89,61 @@ export class DropiClient {
   }
 
   /**
+   * Lists the Dropi catalog (for automatic new-product detection).
+   * @param {Object} [opts]
+   * @param {number} [opts.page=1]
+   * @param {number} [opts.limit=100]
+   * @returns {Promise<Array>} Array of raw catalog items (each with an `id`)
+   */
+  async listCatalog({ page = 1, limit = 100 } = {}) {
+    const isEnabled = process.env.DROPI_PROVIDER_ENABLED === 'true' || config.dropiProviderEnabled;
+    const integrationKey = process.env.DROPI_INTEGRATION_KEY || config.dropiIntegrationKey;
+
+    if (!isEnabled) throw new Error('Dropi Provider Disabled');
+    if (!integrationKey) throw new DropiAuthError('Missing Dropi Integration Key');
+
+    const endpoint = `/products?page=${page}&limit=${limit}`;
+    const url = `${this.baseUrl}${endpoint}`;
+    const requestId = randomUUID();
+    const start = Date.now();
+
+    try {
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'dropi-integration-key': integrationKey,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      await db('integration_requests_log').insert({
+        id: requestId,
+        provider: 'dropi',
+        endpoint,
+        status: res.status,
+        latency_ms: Date.now() - start,
+        retries: 0
+      }).catch(() => {});
+
+      if (res.status === 200) {
+        const json = await res.json().catch(() => ({}));
+        if (Array.isArray(json)) return json;
+        if (Array.isArray(json.data)) return json.data;
+        if (Array.isArray(json.items)) return json.items;
+        if (Array.isArray(json.products)) return json.products;
+        return [];
+      }
+      if (res.status === 401 || res.status === 403) {
+        throw new DropiAuthError('Invalid integration key credentials');
+      }
+      throw new DropiAPIError(`Dropi catalog error: ${res.statusText}`, res.status);
+    } catch (err) {
+      if (err.name === 'AbortError') throw new DropiConnectionError('Catalog request timeout');
+      throw err;
+    }
+  }
+
+  /**
    * Creates a fulfillment order in Dropi.
    * @param {Object} payload - { products: [{id, quantity, price}], customer: {name, phone, document, address}, shipping: {city, state, street} }
    * @param {string} [correlationId=null]

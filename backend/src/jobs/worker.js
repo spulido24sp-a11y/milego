@@ -2,6 +2,8 @@ import { dequeue, complete, fail, enqueue } from './queue.js';
 import { ProductService } from '../services/product.service.js';
 import { LaunchEngine } from '../launch-engine/index.js';
 import { OrderConfirmationService } from '../services/order-confirmation.service.js';
+import { LIAMRuntime } from '../brain/liam-runtime.js';
+import { publishLanding } from '../landing/publisher.js';
 import { bus } from '../events/index.js';
 
 const handlers = {};
@@ -13,11 +15,15 @@ export function registerHandler(jobType, handlerFn) {
 // 1. Register background job handlers
 const productService = new ProductService();
 const engine = new LaunchEngine();
+const liam = new LIAMRuntime();
 
 registerHandler('process_launch_blueprint', async (payload) => {
   const { productId } = payload;
   const product = await productService.getById(productId);
-  if (!product) return;
+  if (!product) {
+    console.warn(`[LIAM] producto #${productId} no encontrado — se omite`);
+    return;
+  }
 
   const rawData = {
     name: product.name,
@@ -31,13 +37,73 @@ registerHandler('process_launch_blueprint', async (payload) => {
     weight: 1.5
   };
 
+  // 1. Blueprint de lanzamiento (contenido base de la landing)
   const processed = await engine.process('manual', rawData);
-  await productService.update(productId, {
-    launch_blueprint: processed.brain_analysis
-  });
+  const blueprint = processed.brain_analysis || {};
+
+  // 2. LIAM decide — ReasoningEngine + ScoringEngine + proveedor (Gemini/mock)
+  //    Evalúa margen, logística, calidad de datos y ROAS, y emite un
+  //    veredicto comercial (PROCEED / PROCEED_WITH_CAUTION / BLOCK).
+  let decision = null;
+  try {
+    const liamResult = await liam.processRequest({
+      objective: 'Analiza este producto de Dropi: calcula margen y costo, evalúa la logística y la calidad de datos, y decide si proceder a publicarlo y dejarlo listo para vender.',
+      context: { productId: String(productId) },
+      storeId: product.store_id || 1
+    });
+
+    const r = liamResult.reasoning || {};
+    const s = liamResult.scoring || {};
+
+    // Mapea el veredicto de LIAM a una acción comercial ejecutable
+    const ACTION = {
+      PROCEED:               'ESCALAR',
+      PROCEED_WITH_CAUTION: 'TESTEAR',
+      BLOCK:                 'MEJORAR_OFERTA'
+    };
+
+    decision = {
+      recommendation:  ACTION[r.recommendation] || 'TESTEAR',
+      liam_verdict:   r.recommendation || null,
+      grade:           s.grade ?? null,
+      confidence:      s.confidence ?? null,
+      isLaunchReady:  s.isLaunchReady ?? null,
+      findings:       (r.findings || []).map((f) => f.detail),
+      decidedAt:       new Date().toISOString()
+    };
+  } catch (err) {
+    console.warn(`[LIAM] No se pudo obtener la decisión de LIAM para #${productId}:`, err.message);
+  }
+
+  blueprint.liam_decision = decision;
+  await productService.update(productId, { launch_blueprint: blueprint });
+
+  // 3. LIAM decide si publicar. Si bloquea (BLOCK), deja el producto
+  //    como borrador hasta que se mejore — sin intervención manual forzosa.
+  let published = null;
+  const verdict = decision?.liam_verdict;
+  if (verdict && verdict !== 'BLOCK') {
+    try {
+      published = await publishLanding(productId);
+    } catch (err) {
+      console.warn(`[LIAM] Fallo la publicación de landing para #${productId}:`, err.message);
+    }
+  } else if (verdict === 'BLOCK') {
+    console.info(`[LIAM] producto #${productId} "${product.name}" bloqueado — no se publica hasta mejorar la oferta/datos.`);
+  }
+
+  // 4. Log claro de lo que LIAM decidió con este producto
+  const d = decision || {};
+  console.info(
+    `[LIAM] #${productId} "${product.name}": ` +
+    `veredicto=${d.liam_verdict ?? 'N/A'} → acción=${d.recommendation ?? 'N/A'} | ` +
+    `grado=${d.grade ?? '?'} | confianza=${d.confidence ?? '?'} | ` +
+    `landing=${published?.url ?? 'NO PUBLICADA'} | ` +
+    `estado=${published ? 'published' : 'borrador'}`
+  );
 
   // Emit event indicating analysis completion
-  await bus.emit('product.analyzed', { productId, blueprint: processed.brain_analysis });
+  await bus.emit('product.analyzed', { productId, blueprint, decision });
 });
 
 const orderConfirmationService = new OrderConfirmationService();

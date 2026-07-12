@@ -9,7 +9,6 @@ COPY backend/ ./backend/
 COPY data/ ./data/
 COPY gracias.html ./
 COPY uploads/ ./uploads/
-COPY knexfile.cjs ./backend/knexfile.cjs
 
 EXPOSE 3000
 

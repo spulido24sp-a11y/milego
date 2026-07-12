@@ -3,9 +3,19 @@ import { DropiClient } from './client.js';
 import { DropiMapper } from './mapper.js';
 import { ProductService } from '../../services/product.service.js';
 import db from '../../config/database.js';
+import { config } from '../../config/index.js';
 
 const client = new DropiClient();
 const productService = new ProductService();
+
+let _syncServiceInstance = null;
+function getSyncService() {
+  if (!_syncServiceInstance) _syncServiceInstance = new DropiSyncService();
+  return _syncServiceInstance;
+}
+
+// Intervalo de polling del catálogo Dropi (default 30 min). Variable de entorno opcional.
+const CATALOG_POLL_MS = parseInt(process.env.DROPI_CATALOG_POLL_MS, 10) || 30 * 60 * 1000;
 
 export class DropiSyncService extends CommerceProvider {
   /**
@@ -161,4 +171,63 @@ export class DropiSyncService extends CommerceProvider {
     const report = await health.checkHealth();
     return report.reachable;
   }
+}
+
+/**
+ * Detecta y  importa productos NUEVOS del catálogo Dropi.
+ * Recorre el catálogo y, por cada item cuyo provider_product_id aún no
+ * exista en la tienda, dispara la importación (que a su vez emite
+ * 'product.created' → el worker de LIAM procesa el producto de forma autónoma).
+ * @param {number} [storeId=1]
+ * @returns {Promise<{imported:number,skipped:number}>}
+ */
+export async function syncCatalogOnce(storeId = 1) {
+  const list = await client.listCatalog({ page: 1, limit: 100 });
+
+  let imported = 0;
+  let skipped = 0;
+
+  for (const item of list) {
+    const externalId = item?.id ?? item?.product_id ?? item?.external_id;
+    if (!externalId) continue;
+
+    const existing = await db('products')
+      .where({ provider_product_id: String(externalId), store_id: storeId })
+      .first();
+    if (existing) { skipped++; continue; }
+
+    try {
+      const product = await getSyncService().importProduct(String(externalId), storeId);
+      imported++;
+      console.info(`[DropiSync] Nuevo producto importado → #${product.id} ${product.name}`);
+    } catch (err) {
+      console.warn(`[DropiSync] Fallo import ${externalId}:`, err.message);
+    }
+  }
+
+  return { imported, skipped };
+}
+
+/**
+ * Inicia el worker programado de sincronización de catálogo Dropi.
+ * Corre una vez al arrancar y luego cada CATALOG_POLL_MS.
+ * Reutiliza el mismo patrón del ad-sync worker (setInterval + unref).
+ * @param {number} [storeId=1]
+ * @param {number} [intervalMs=CATALOG_POLL_MS]
+ * @returns {Interval}
+ */
+export function startDropiCatalogSync(storeId = 1, intervalMs = CATALOG_POLL_MS) {
+  if (!config.dropiProviderEnabled) {
+    console.info('[DropiSync] Proveedor Dropi inactivo (DROPI_PROVIDER_ENABLED != "true"). Worker no iniciado.');
+    return null;
+  }
+
+  console.info(`[DropiSync] Worker de catálogo iniciado — cada ${Math.round(intervalMs / 60000)} min`);
+  syncCatalogOnce(storeId).catch((e) => console.warn('[DropiSync]', e.message));
+
+  const interval = setInterval(() => {
+    syncCatalogOnce(storeId).catch((e) => console.warn('[DropiSync]', e.message));
+  }, intervalMs);
+  interval.unref();
+  return interval;
 }

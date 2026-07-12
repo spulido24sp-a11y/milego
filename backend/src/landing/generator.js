@@ -432,11 +432,8 @@ function renderBenefits(product, bp) {
 function renderTestimonials(product, bp) {
   const productName = product.name || 'este producto';
   const data = bp.content?.testimonials || [];
-  const items = data.length >= 3 ? data.slice(0, 3) : [
-    { name: 'María García', city: 'Bogotá', avatar: 'https://i.pravatar.cc/48?img=1', text: `${productName} cambió mi clóset por completo. Antes todo era un desorden. Ahora cada cosa tiene su lugar y me visto en la mitad del tiempo.`, rating: 5 },
-    { name: 'Carlos Martínez', city: 'Medellín', avatar: 'https://i.pravatar.cc/48?img=3', text: `Compré dos unidades y fue la mejor decisión. La calidad supera lo que esperaba por el precio. En 3 días lo tenía en mi casa. Pagué contra entrega.`, rating: 5 },
-    { name: 'Ana Rodríguez', city: 'Cali', avatar: 'https://i.pravatar.cc/48?img=5', text: `Vivo en un apartamento pequeño y el espacio siempre fue un problema. Con ${productName} dupliqué mi capacidad sin obras. 100% recomendado.`, rating: 5 },
-  ];
+  if (data.length === 0) return ''; // sin reseñas reales: evitar nombres falsos
+  const items = data.slice(0, 3);
 
   return `<section id="testimonials" class="testimonials section">
     <div class="container">
@@ -696,6 +693,27 @@ export async function generateLanding(product, storeSettings) {
   const trafficContext = product.traffic_context || { source: 'facebook' };
   const croConfig = await conversionCompiler.compileCRODecision(product, trafficContext);
 
+  // P0: datos reales (sin placeholders falsos) — prueba social y WhatsApp desde la BD/entorno
+  let _storeRow = null;
+  let _orderCount = 0;
+  try {
+    const _orderRow = await db('orders').count('id as c').first();
+    _orderCount = Number((_orderRow && _orderRow.c) || 0);
+    if (product.store_id) _storeRow = await db('stores').where({ id: product.store_id }).first();
+  } catch (e) {
+    console.warn('[Landing] No se pudo cargar prueba social/WhatsApp:', e.message);
+  }
+  const _waRaw = (_storeRow && _storeRow.whatsapp_number)
+    || (storeSettings && storeSettings.contact_whatsapp)
+    || (process.env.WHATSAPP_DISPLAY_NUMBER || '');
+  const _waDigits = _waRaw ? String(_waRaw).replace(/\D/g, '') : '';
+  const WHATSAPP_LINK = _waDigits ? `https://wa.me/${_waDigits}` : '';
+  const SOCIAL_PROOF = _orderCount > 0
+    ? `+${_orderCount.toLocaleString('es-CO')} compras verificadas`
+    : (confidence >= 70 ? 'Verificado por LIAM' : 'Producto verificado');
+  const WHATSAPP_HERO_BTN = WHATSAPP_LINK
+    ? `<a href="${WHATSAPP_LINK}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:#25D366;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> Pregunta por WhatsApp</a>`
+    : '';
 
   const activeTheme = bp.theme || croConfig.theme;
 
@@ -721,7 +739,7 @@ export async function generateLanding(product, storeSettings) {
 
 
   const title = seo.title || `${productName} | Transforma tu hogar | MIleGo`;
-  const metaDesc = seo.description || `Compra ${productName} al mejor precio en Colombia. Envío gratis, pago contra entrega, 30 días de garantía. +2.000 clientes satisfechos.`;
+  const metaDesc = seo.description || `Compra ${productName} al mejor precio en Colombia. Envío gratis, pago contra entrega, 30 días de garantía. ${SOCIAL_PROOF}.`;
 
   const pixelId = storeSettings?.meta_pixel_id || '';
   const pixelSnippet = buildPixelSnippet(pixelId, product, pageUrl);
@@ -782,7 +800,8 @@ export async function generateLanding(product, storeSettings) {
         const blockHtmlRaw = readFileSync(blockPath, 'utf-8');
         
         // Cargar variables
-        const oldPrice = priceUnit > 0 ? Math.round(priceUnit * 1.3) : 0;
+        const _offerOld = parseFloat(offer.old_price);
+        const oldPrice = (_offerOld > priceUnit) ? Math.round(_offerOld) : 0;
         const discountPct = oldPrice > 0 ? Math.round((1 - priceUnit / oldPrice) * 100) : 0;
         const ctaText = croConfig.cta || hooks[2] || 'QUIERO EL MÍO AHORA';
         const stock = parseInt(product.stock, 10) || 0;
@@ -844,7 +863,10 @@ export async function generateLanding(product, storeSettings) {
           FAQ_ITEMS: faqItems,
           BENEFIT_ITEMS: benefitItems,
           GALLERY_IMAGES: galleryImages,
-          BUNDLE_TIERS: bundleTiers
+          BUNDLE_TIERS: bundleTiers,
+          WHATSAPP_LINK,
+          SOCIAL_PROOF,
+          WHATSAPP_HERO_BTN
         };
 
         return renderTemplate(blockHtmlRaw, context);
@@ -858,6 +880,10 @@ export async function generateLanding(product, storeSettings) {
     return renderer ? renderer(product, bp) : '';
   }).filter(Boolean).join('\n\n');
 
+  const whatsappButton = WHATSAPP_LINK
+    ? `<a class="wa-float" href="${WHATSAPP_LINK}" target="_blank" rel="noopener" aria-label="Hablar por WhatsApp" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;padding:12px 16px;border-radius:999px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.25);font-family:inherit;"><i class="fa-brands fa-whatsapp" style="font-size:20px;"></i><span>Hablar por WhatsApp</span></a>`
+    : '';
+
   let foot = TEMPLATE_FOOT
     .replace(/{{PAGE_TITLE}}/g, esc(title))
     .replace(/{{PRODUCT_ID}}/g, esc(product.id))
@@ -867,7 +893,8 @@ export async function generateLanding(product, storeSettings) {
     .replace(/{{CHECKOUT_TEXT}}/g, esc(checkoutText))
     .replace(/{{CHECKOUT_OPTIONS}}/g, '')
     .replace(/{{CHECKOUT_TOTAL}}/g, priceUnit > 0 ? formatPrice(priceUnit) : '')
-    .replace(/{{CHECKOUT_TOTAL_VALUE}}/g, priceUnit || '');
+    .replace(/{{CHECKOUT_TOTAL_VALUE}}/g, priceUnit || '')
+    .replace(/{{WHATSAPP_BUTTON}}/g, whatsappButton);
 
   const html = head + '\n' + renderedBlocks + '\n' + foot;
 
