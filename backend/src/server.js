@@ -5,6 +5,16 @@ import { logger } from './middlewares/requestLogger.js';
 import { startWorker } from './jobs/worker.js';
 import { startAdSyncWorker } from './workers/ad-sync.worker.js';
 
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+  process.exit(1);
+});
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION:', err);
+});
+
+console.log('[STARTUP] server.js loaded, PORT=', process.env.PORT, 'NODE_ENV=', process.env.NODE_ENV);
+
 const PORT = config.port || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
