@@ -9,12 +9,20 @@ async function start() {
   try {
     await db.raw('SELECT 1');
     logger.info('Database connected');
-    
-    // Start background job queue worker for Core 2.0
-    startWorker(5000);
 
-    // Start background sync for Meta and TikTok Ads snapshots
-    startAdSyncWorker();
+    // Start background job queue worker for Core 2.0 (non-blocking)
+    try {
+      startWorker(5000);
+    } catch (e) {
+      logger.error({ err: e }, 'Worker failed to start');
+    }
+
+    // Start background sync for Meta and TikTok Ads snapshots (non-blocking)
+    try {
+      startAdSyncWorker();
+    } catch (e) {
+      logger.error({ err: e }, 'AdSync worker failed to start');
+    }
   } catch (err) {
     logger.error({ err }, 'Database connection failed');
     process.exit(1);
