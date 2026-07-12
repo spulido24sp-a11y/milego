@@ -801,7 +801,9 @@ export async function generateLanding(product, storeSettings) {
         
         // Cargar variables
         const _offerOld = parseFloat(offer.old_price);
-        const oldPrice = (_offerOld > priceUnit) ? Math.round(_offerOld) : 0;
+        const _compare = parseFloat(product.compare_price);
+        const oldPrice = (_offerOld > priceUnit) ? Math.round(_offerOld)
+          : (_compare > priceUnit ? Math.round(_compare) : 0);
         const discountPct = oldPrice > 0 ? Math.round((1 - priceUnit / oldPrice) * 100) : 0;
         const ctaText = croConfig.cta || hooks[2] || 'QUIERO EL MÍO AHORA';
         const stock = parseInt(product.stock, 10) || 0;
