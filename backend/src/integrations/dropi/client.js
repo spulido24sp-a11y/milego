@@ -6,7 +6,7 @@ import { randomUUID } from 'crypto';
 export class DropiClient {
   constructor() {
     this.baseUrl = config.env === 'production' 
-      ? 'https://api.dropi.co/api/v1' 
+      ? 'https://app.dropi.co/api/v1' 
       : 'https://test.api.dropi.co/api/v1';
   }
 
