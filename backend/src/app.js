@@ -25,6 +25,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use(corsMiddleware);
 app.use(express.json());
 
+// Root health (no DB needed) — Railway healthcheck fallback
+app.get('/', (_req, res) => {
+  res.status(200).json({ status: 'ok', service: 'milego-api', ts: Date.now() });
+});
+
 app.get('/api/placeholder/:size', (req, res) => {
   const size = parseInt(req.params.size, 10) || 500;
   res.setHeader('Content-Type', 'image/svg+xml');
