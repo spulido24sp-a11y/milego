@@ -10,6 +10,7 @@ import { correlationId } from './middlewares/correlationId.js';
 import { requestLogger } from './middlewares/requestLogger.js';
 import { routes } from './routes/index.js';
 import { registerEventHandlers } from './events/register.js';
+import woocommerceReceiver from './integrations/woocommerce/receiver.js';
 
 const app = express();
 
@@ -41,6 +42,11 @@ app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathna
 app.use(correlationId);
 app.use(requestLogger);
 app.use('/api/v1', routes);
+
+// WooCommerce-compatible receiver so Dropi can push its catalog to MileGo
+// (Dropi "Dropi => Woocommerce" integration posts to /wp-json/wc/v3/...)
+app.use('/wp-json/wc/v3', woocommerceReceiver);
+app.use('/wp-json/wc/v2', woocommerceReceiver);
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const swaggerDocument = YAML.parse(readFileSync(`${__dirname}docs/openapi.yml`, 'utf8'));
