@@ -724,7 +724,7 @@ export async function generateLanding(product, storeSettings) {
     ? `<a href="${WHATSAPP_LINK}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:#25D366;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> Pregunta por WhatsApp</a>`
     : '';
 
-  const activeTheme = bp.theme || croConfig.theme;
+  const activeTheme = bp.theme || croConfig.theme || 'conversion-v2';
 
   // Cargar orden de bloques: 1. Blueprint, 2. theme.json, 3. Conversion Compiler CRO recipe
   let blocks = bp.blocks;
@@ -799,7 +799,8 @@ export async function generateLanding(product, storeSettings) {
       <div class="form-group">
         <input type="text" id="billing_city" name="billing_city" class="form-input" placeholder="Ciudad / Municipio" required style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1;">
       </div>
-      <button type="submit" class="btn btn-primary btn-block" style="padding:12px; font-weight:800; font-size:1rem; cursor:pointer;">Confirmar Pedido Contra Entrega</button>
+      <input type="hidden" id="productId" value="{{PRODUCT_ID}}">
+      <button type="submit" class="btn btn-primary btn-block" style="padding:12px; font-weight:800; font-size:1rem; cursor:pointer;">CONFIRMAR MI PEDIDO</button>
     </form>`;
 
   const renderedBlocks = blocks.map(type => {
