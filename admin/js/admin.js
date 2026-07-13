@@ -11,8 +11,10 @@ function __showErr(msg) {
 window.addEventListener('error', (e) => __showErr((e.error && e.error.stack) || (e.message + ' @ ' + e.filename + ':' + e.lineno)));
 window.addEventListener('unhandledrejection', (e) => __showErr('REJECT: ' + ((e.reason && (e.reason.stack || e.reason.message)) || e.reason)));
 
+document.title = 'A_START';
 const router = new Router();
 const app = document.getElementById('app');
+console.log('[admin] module body start; app =', !!app);
 
 function redirectToLogin() {
   app.innerHTML = `
@@ -131,6 +133,8 @@ if (api.isAuthenticated) {
   router.navigate('/login');
 }
 router.start();
+document.title = 'A_AFTER_START hash=' + window.location.hash;
 window.__rt = redirectToLogin;
 window.__api = api;
 window.__router = router;
+document.title = 'A_END appLen=' + (app ? app.innerHTML.length : 'NULL');
