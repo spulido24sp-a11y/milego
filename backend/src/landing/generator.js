@@ -30,14 +30,23 @@ function formatOldPrice(n) {
   return '$' + Math.round(n).toLocaleString('es-CO');
 }
 
+// Branded placeholder so missing product photos still look premium (not gray boxes)
+function placeholderFor(name, category, size = 500) {
+  const p = new URLSearchParams();
+  if (name) p.set('label', String(name).slice(0, 60));
+  if (category) p.set('sub', String(category).slice(0, 40));
+  const q = p.toString();
+  return `/api/placeholder/${size}${q ? `?${q}` : ''}`;
+}
+
 function renderHero(product, bp) {
   const offer = bp.offer || {};
   const marketing = bp.marketing || {};
   const hooks = marketing.hooks || [];
   const confidence = bp.confidence || 0;
   const priceUnit = parseFloat(offer.price_unit) || parseFloat(product.price) || 0;
-  const images = (product.images || []).length > 0 ? product.images : [{ url: product.image || '/api/placeholder/500' }];
-  const mainImage = images[0]?.url || '/api/placeholder/500';
+  const images = (product.images || []).length > 0 ? product.images : [{ url: placeholderFor(product.name, product.category) }];
+  const mainImage = images[0]?.url || placeholderFor(product.name, product.category);
   const productName = product.name || 'Producto';
 
   const oldPrice = priceUnit > 0 ? Math.round(priceUnit * 1.3) : 0;
@@ -685,8 +694,8 @@ export async function generateLanding(product, storeSettings) {
   const pageUrl = `${siteUrl}/launch/${slug}`;
   const productName = product.name || 'Producto';
   const priceUnit = parseFloat(offer.price_unit) || parseFloat(product.price) || 0;
-  const images = (product.images || []).length > 0 ? product.images : [{ url: product.image || '/api/placeholder/500' }];
-  const mainImage = images[0]?.url || '/api/placeholder/500';
+  const images = (product.images || []).length > 0 ? product.images : [{ url: placeholderFor(productName, product.category) }];
+  const mainImage = images[0]?.url || placeholderFor(productName, product.category);
   const hooks = bp.marketing?.hooks || [];
 
   const conversionCompiler = new LIAMConversionCompiler();

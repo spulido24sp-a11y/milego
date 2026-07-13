@@ -32,11 +32,64 @@ app.get('/', (_req, res) => {
 });
 
 app.get('/api/placeholder/:size', (req, res) => {
-  const size = parseInt(req.params.size, 10) || 500;
+  const size = Math.min(parseInt(req.params.size, 10) || 500, 1200);
+  const label = String(req.query.label || '').trim().slice(0, 60);
+  const sub = String(req.query.sub || '').trim().slice(0, 40);
+  const W = 500, H = 500;
+  const scale = size / W;
+
+  // wrap label into lines (~22 chars each)
+  const words = label ? label.split(/\s+/) : [];
+  const lines = [];
+  let cur = '';
+  for (const w of words) {
+    if ((cur + ' ' + w).trim().length > 22) { if (cur) lines.push(cur); cur = w; }
+    else cur = (cur + ' ' + w).trim();
+  }
+  if (cur) lines.push(cur);
+  if (lines.length === 0) lines.push('MIleGo');
+  const fontSize = lines.length > 1 ? 30 : 34;
+  const startY = 320 - (lines.length - 1) * 19;
+  const labelSvg = lines.map((l, i) =>
+    `<text x="${W / 2}" y="${startY + i * 38}" font-family="Outfit, Arial, sans-serif" font-weight="800" font-size="${fontSize}" fill="#ffffff" text-anchor="middle">${escXml(l)}</text>`
+  ).join('');
+  const subSvg = sub
+    ? `<text x="${W / 2}" y="${startY + lines.length * 38 + 6}" font-family="Outfit, Arial, sans-serif" font-weight="600" font-size="15" fill="#e0e7ff" text-anchor="middle" letter-spacing="0.5">${escXml(sub.toUpperCase())}</text>`
+    : '';
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="55%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#bg)"/>
+  <rect width="${W}" height="${H}" fill="url(#glow)"/>
+  <circle cx="90" cy="90" r="120" fill="#ffffff" opacity="0.06"/>
+  <circle cx="430" cy="460" r="140" fill="#ffffff" opacity="0.06"/>
+  <g transform="translate(${W / 2}, 175)" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.92" stroke-linejoin="round">
+    <rect x="-58" y="-46" width="116" height="92" rx="14" fill="#ffffff" fill-opacity="0.12"/>
+    <circle cx="-22" cy="-16" r="12" fill="#ffffff" fill-opacity="0.9" stroke="none"/>
+    <path d="M-50 30 L-10 -6 L18 22 L40 2 L50 30 Z" fill="#ffffff" fill-opacity="0.9" stroke="none"/>
+  </g>
+  ${labelSvg}
+  ${subSvg}
+  <text x="${W / 2}" y="468" font-family="Outfit, Arial, sans-serif" font-weight="700" font-size="14" fill="#ffffff" fill-opacity="0.85" text-anchor="middle" letter-spacing="2">MI·LE·GO</text>
+</svg>`;
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('Cache-Control', 'public, max-age=86400');
-  res.send(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="#f1f5f9"/><text x="${size/2}" y="${size/2}" font-family="Arial,sans-serif" font-size="${size/15}" fill="#94a3b8" text-anchor="middle" dominant-baseline="central">Sin imagen</text></svg>`);
+  res.send(svg);
 });
+
+function escXml(s) {
+  return String(s).replace(/[<>&'"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&#39;', '"': '&quot;' }[c]));
+}
 app.use('/admin', express.static(fileURLToPath(new URL('../../admin', import.meta.url))));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(correlationId);
