@@ -906,6 +906,7 @@ export async function generateLanding(product, storeSettings) {
     .replace(/{{CHECKOUT_OPTIONS}}/g, '')
     .replace(/{{CHECKOUT_TOTAL}}/g, priceUnit > 0 ? formatPrice(priceUnit) : '')
     .replace(/{{CHECKOUT_TOTAL_VALUE}}/g, priceUnit || '')
+    .replace(/{{OFFER_PRICE}}/g, formatPrice(priceUnit))
     .replace(/{{WHATSAPP_BUTTON}}/g, whatsappButton);
 
   const html = head + '\n' + renderedBlocks + '\n' + foot;
