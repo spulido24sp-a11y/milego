@@ -93,7 +93,7 @@ function escXml(s) {
 }
 const adminDir = fileURLToPath(new URL('../../admin', import.meta.url));
 app.get('/admin', (_req, res) => res.redirect('/admin/'));
-app.use('/admin', express.static(adminDir, { index: false }));
+app.use('/admin', express.static(adminDir, { index: false, redirect: false }));
 app.get(['/admin/', '/admin/index.html'], (_req, res) => res.sendFile(join(adminDir, 'index.html')));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(correlationId);
