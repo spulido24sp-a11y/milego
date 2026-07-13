@@ -6,7 +6,7 @@ COPY backend/package*.json ./backend/
 RUN cd backend && npm ci --production=false
 
 COPY backend/ ./backend/
-COPY admin/ ./backend/admin/
+COPY admin/ ./admin/
 COPY data/ ./data/
 COPY gracias.html ./
 COPY uploads/ ./uploads/
