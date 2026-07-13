@@ -92,8 +92,7 @@ function escXml(s) {
   return String(s).replace(/[<>&'"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&#39;', '"': '&quot;' }[c]));
 }
 const adminDir = fileURLToPath(new URL('../../admin', import.meta.url));
-app.get('/admin', (_req, res) => res.redirect('/admin/'));
-app.get('/admin/', (_req, res) => res.sendFile(join(adminDir, 'index.html')));
+app.get('/admin', (_req, res) => res.sendFile(join(adminDir, 'index.html')));
 app.use('/admin', express.static(adminDir, { index: false, redirect: false }));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(correlationId);
