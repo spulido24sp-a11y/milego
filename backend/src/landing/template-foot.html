@@ -53,6 +53,7 @@
 
 <script>
 (function(){
+  try {
   // FAQ toggle
   document.querySelectorAll('.faq-item').forEach(function(el){
     el.addEventListener('click', function(){ this.classList.toggle('open'); });
@@ -219,6 +220,7 @@
 
   window.__track = track;
   window.__sessionId = SID;
+} catch(e) { console.error('[landing]', e); }
 })();
 </script>
 <script src="/config.js"></script>
