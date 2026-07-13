@@ -61,6 +61,30 @@ const server = app.listen(PORT, HOST, () => {
     logger.error({ err: e }, 'Dropi catalog worker failed to start');
   }
 
+  // P0: garantizar usuario admin (los seeds no corren solos en prod)
+  (async () => {
+    try {
+      const existing = await db('users').where({ email: 'admin@milego.co' }).first();
+      if (existing) return;
+      const storeRow = await db('stores').where({ slug: 'milego-store' }).orWhere('id', 1).first();
+      const storeId = storeRow?.id || 1;
+      let roleId = (await db('roles').where({ slug: 'admin' }).orWhere('name', 'admin').first())?.id;
+      if (!roleId) {
+        const roles = await db('roles').insert({ name: 'admin', slug: 'admin', is_system: true }).returning('id');
+        roleId = roles[0]?.id || roles[0];
+      }
+      const { default: argon2 } = await import('argon2');
+      const passwordHash = await argon2.hash(process.env.ADMIN_PASSWORD || 'admin123');
+      await db('users').insert({
+        name: 'Administrador MIleGo', email: 'admin@milego.co',
+        password_hash: passwordHash, store_id: storeId, role_id: roleId, is_active: true,
+      });
+      logger.info('Usuario admin garantizado: admin@milego.co');
+    } catch (e) {
+      logger.error({ err: e }, 'No se pudo garantizar usuario admin');
+    }
+  })();
+
   // P0: publicar landings de todos los productos (para poder vender hoy)
   (async () => {
     try {
