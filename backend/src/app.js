@@ -90,6 +90,7 @@ app.get('/api/placeholder/:size', (req, res) => {
 function escXml(s) {
   return String(s).replace(/[<>&'"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&#39;', '"': '&quot;' }[c]));
 }
+app.get('/admin', (_req, res) => res.redirect('/admin/'));
 app.use('/admin', express.static(fileURLToPath(new URL('../../admin', import.meta.url))));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(correlationId);
