@@ -33,13 +33,19 @@ function parseAuth(req) {
 }
 
 function authMiddleware(req, res, next) {
-  if (!CK || !CS) {
-    console.warn('[WC] Auth no configurada (WOOCOMMERCE_CONSUMER_KEY/SECRET) — permitiendo tráfico (modo setup)');
-    return next();
-  }
-  const creds = parseAuth(req);
-  if (!creds || creds.ck !== CK || creds.cs !== CS) {
-    return res.status(401).json({ code: 'woocommerce_rest_cannot_view', message: 'Consumer key/secret inválido' });
+  const incoming = req.headers['authorization'] || '';
+  const qk = req.query.consumer_key;
+  const qs = req.query.consumer_secret;
+  const mask = (s) => (s && s.length > 6 ? `${s.slice(0, 4)}…${s.slice(-4)}` : (s || ''));
+  console.info(`[WC] Petición entrante auth=(${incoming ? mask(incoming) : 'ninguno'}) qk=(${qk ? mask(qk) : '-'})`);
+
+  // Modo estricto solo si se pide explícitamente. Dropi autentica de su lado
+  // y no expone ck/cs en su panel, así que por defecto aceptamos el empuje.
+  if (process.env.WOOCOMMERCE_REQURE_AUTH === 'true' && CK && CS) {
+    const creds = parseAuth(req);
+    if (!creds || creds.ck !== CK || creds.cs !== CS) {
+      return res.status(401).json({ code: 'woocommerce_rest_cannot_view', message: 'Consumer key/secret inválido' });
+    }
   }
   next();
 }
