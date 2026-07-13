@@ -10,6 +10,19 @@
 </head>
 <body>
   <div id="app"></div>
+  <script>
+    window.__errs = [];
+    window.addEventListener('error', function (e) {
+      window.__errs.push((e.error && e.error.stack) || (e.message + ' @ ' + e.filename + ':' + e.lineno));
+      var a = document.getElementById('app');
+      if (a) a.innerHTML = '<pre style="color:#fff;background:#7f1d1;padding:20px;white-space:pre-wrap;font:13px monospace">ERROR: ' + (window.__errs.join('\n\n')) + '</pre>';
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__errs.push('REJECT: ' + ((e.reason && (e.reason.stack || e.reason.message)) || e.reason));
+      var a = document.getElementById('app');
+      if (a) a.innerHTML = '<pre style="color:#fff;background:#7f1d1;padding:20px;white-space:pre-wrap;font:13px monospace">REJECT: ' + (window.__errs.join('\n\n')) + '</pre>';
+    });
+  </script>
   <script type="module" src="js/admin.js"></script>
 </body>
 </html>
