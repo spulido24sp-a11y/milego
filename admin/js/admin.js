@@ -6,15 +6,13 @@ import { renderTopbar } from './components/topbar.js';
 // CSP blocks inline scripts, so error capture must live in a module (allowed by 'self')
 function __showErr(msg) {
   const a = document.getElementById('app');
-  if (a) a.innerHTML = '<pre style="color:#fff;background:#7f1d1;padding:20px;white-space:pre-wrap;font:13px monospace">ERR: ' + msg + '</pre>';
+  if (a) a.innerHTML = '<pre style="color:#fff;background:#7f1d1d;padding:20px;white-space:pre-wrap;font:13px monospace">ERR: ' + msg + '</pre>';
 }
 window.addEventListener('error', (e) => __showErr((e.error && e.error.stack) || (e.message + ' @ ' + e.filename + ':' + e.lineno)));
 window.addEventListener('unhandledrejection', (e) => __showErr('REJECT: ' + ((e.reason && (e.reason.stack || e.reason.message)) || e.reason)));
 
-document.title = 'A_START';
 const router = new Router();
 const app = document.getElementById('app');
-console.log('[admin] module body start; app =', !!app);
 
 function redirectToLogin() {
   app.innerHTML = `
@@ -133,8 +131,6 @@ if (api.isAuthenticated) {
   router.navigate('/login');
 }
 router.start();
-document.title = 'A_AFTER_START hash=' + window.location.hash;
 window.__rt = redirectToLogin;
 window.__api = api;
 window.__router = router;
-document.title = 'A_END appLen=' + (app ? app.innerHTML.length : 'NULL');
