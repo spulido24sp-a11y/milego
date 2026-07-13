@@ -3,23 +3,25 @@ import db from '../config/database.js';
 export class UserRepository {
   async findByEmail(email) {
     return db('users')
-      .join('roles', 'users.role_id', 'roles.id')
-      .join('role_permissions', 'roles.id', 'role_permissions.role_id')
-      .join('permissions', 'role_permissions.permission_id', 'permissions.id')
       .where({ 'users.email': email, 'users.deleted_at': null })
-      .select('users.*', db.raw('array_agg(permissions.slug) as permissions'))
-      .groupBy('users.id')
+      .select('users.*', db.raw(`(
+        SELECT COALESCE(array_agg(p.slug), ARRAY[]::text[])
+        FROM "role_permissions" rp
+        JOIN "permissions" p ON p.id = rp.permission_id
+        WHERE rp.role_id = users.role_id
+      ) as permissions`))
       .first();
   }
 
   async findById(id) {
     return db('users')
-      .join('roles', 'users.role_id', 'roles.id')
-      .join('role_permissions', 'roles.id', 'role_permissions.role_id')
-      .join('permissions', 'role_permissions.permission_id', 'permissions.id')
       .where({ 'users.id': id, 'users.deleted_at': null })
-      .select('users.*', db.raw('array_agg(permissions.slug) as permissions'))
-      .groupBy('users.id')
+      .select('users.*', db.raw(`(
+        SELECT COALESCE(array_agg(p.slug), ARRAY[]::text[])
+        FROM "role_permissions" rp
+        JOIN "permissions" p ON p.id = rp.permission_id
+        WHERE rp.role_id = users.role_id
+      ) as permissions`))
       .first();
   }
 
