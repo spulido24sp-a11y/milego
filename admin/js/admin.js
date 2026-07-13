@@ -120,7 +120,6 @@ api.loadTokens();
 if (api.isAuthenticated) {
   router.navigate('/dashboard');
 } else {
-  redirectToLogin();
+  router.navigate('/login');
 }
-
 router.start();
