@@ -724,7 +724,7 @@ export async function generateLanding(product, storeSettings) {
     ? `<a href="${WHATSAPP_LINK}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:#25D366;color:#fff;font-weight:700;padding:10px 14px;border-radius:8px;text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> Pregunta por WhatsApp</a>`
     : '';
 
-  const activeTheme = bp.theme || 'conversion-v2';
+  const activeTheme = bp.theme || 'stripe';
 
   // Cargar orden de bloques: 1. Blueprint, 2. theme.json, 3. Conversion Compiler CRO recipe
   let blocks = bp.blocks;

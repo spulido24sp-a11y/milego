@@ -1,0 +1,4 @@
+{
+  "name": "Stripe Premium (Light/Purple)",
+  "blocks": ["hero", "trust", "benefits", "gallery", "offer", "faq", "checkout"]
+}

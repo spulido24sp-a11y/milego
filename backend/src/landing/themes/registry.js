@@ -26,5 +26,11 @@ export const THEMES_REGISTRY = {
     name: 'Minimal Clean (Lifestyle)',
     path: 'src/landing/themes/minimal',
     components: ['hero.html', 'offer.html', 'gallery.html', 'benefits.html', 'faq.html', 'trust.html', 'checkout.html']
+  },
+  stripe: {
+    id: 'stripe',
+    name: 'Stripe Premium (Light/Purple)',
+    path: 'src/landing/themes/stripe',
+    components: ['hero.html', 'offer.html', 'gallery.html', 'benefits.html', 'faq.html', 'trust.html', 'checkout.html']
   }
 };
