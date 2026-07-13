@@ -16,9 +16,10 @@ import woocommerceReceiver from './integrations/woocommerce/receiver.js';
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }));
 } else {
-  // Relaxed helmet settings for local development so SSL is not forced
   app.use(helmet({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false
