@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { corsMiddleware } from './config/cors.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { correlationId } from './middlewares/correlationId.js';
@@ -90,8 +91,10 @@ app.get('/api/placeholder/:size', (req, res) => {
 function escXml(s) {
   return String(s).replace(/[<>&'"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&#39;', '"': '&quot;' }[c]));
 }
+const adminDir = fileURLToPath(new URL('../../admin', import.meta.url));
 app.get('/admin', (_req, res) => res.redirect('/admin/'));
-app.use('/admin', express.static(fileURLToPath(new URL('../../admin', import.meta.url))));
+app.use('/admin', express.static(adminDir, { index: false }));
+app.get(['/admin/', '/admin/index.html'], (_req, res) => res.sendFile(join(adminDir, 'index.html')));
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname));
 app.use(correlationId);
 app.use(requestLogger);
