@@ -181,7 +181,7 @@
         alert('Error de conexion. Verifica tu internet.'); btn.disabled = false; btn.textContent = 'CONFIRMAR MI PEDIDO';
       });
     });
-  }
+  } catch(e) { console.error('[landing]', e); }
 })();
 </script>
 
@@ -220,7 +220,6 @@
 
   window.__track = track;
   window.__sessionId = SID;
-} catch(e) { console.error('[landing]', e); }
 })();
 </script>
 <script src="/config.js"></script>
