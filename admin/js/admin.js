@@ -123,3 +123,6 @@ if (api.isAuthenticated) {
   router.navigate('/login');
 }
 router.start();
+window.__rt = redirectToLogin;
+window.__api = api;
+window.__router = router;
