@@ -1,6 +1,6 @@
 import express from 'express';
-import db from '../config/database.js';
-import { publishLanding } from '../landing/publisher.js';
+import db from '../../config/database.js';
+import { publishLanding } from '../../landing/publisher.js';
 
 const router = express.Router();
 
